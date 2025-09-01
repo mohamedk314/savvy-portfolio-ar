@@ -1,0 +1,47 @@
+@import "tailwindcss";
+@source "../**/*.{ts,tsx,js,jsx,mdx,html}";
+
+/* SAVVY palette (from your logo) */
+@theme {
+  --color-surface: #0f1420;      /* page bg */
+  --color-surface-2: #171d2b;    /* cards/nav active */
+  --color-text: #e6eefc;         /* main text */
+
+  --color-brand-400: #39a5ff;    /* light blue */
+  --color-brand-600: #2a78d3;    /* primary */
+  --color-brand-700: #1e5fb1;    /* hover */
+}
+
+:root{ color-scheme: dark; }
+html{ scroll-behavior: smooth; }
+body{ @apply bg-surface text-[--color-text] antialiased; }
+
+.h1{ font-size:clamp(2rem,2.5vw+1.5rem,3.2rem); font-weight:800; }
+.h2{ font-size:clamp(1.5rem,1.5vw+1rem,2.25rem); font-weight:700; }
+.p{ @apply text-[color:rgba(230,238,252,0.8)] text-sm sm:text-base; }
+
+:focus-visible{ outline:2px solid var(--color-brand-400); outline-offset:2px; }
+@media (prefers-reduced-motion:reduce){
+  *{ animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; scroll-behavior:auto!important; }
+}
+
+.container{ max-width: 80rem; /* 1280px */ margin-inline:auto; padding-inline:1rem; }
+@media (min-width: 1024px){ .container{ padding-inline:2rem; } }
+
+/* widen layout */
+.container{ max-width: 80rem; margin-inline:auto; padding-inline:1rem; }
+@media (min-width:1024px){ .container{ padding-inline:2rem; } }
+
+/* full-bleed hero */
+.bleed{ margin-inline:calc(50% - 50vw); width:100vw; }
+.hero-bg{
+  background:
+    radial-gradient(60rem 40rem at 100% -10%, rgba(57,165,255,.15), transparent 60%),
+    radial-gradient(60rem 40rem at   0% -10%, rgba(42,120,211,.12), transparent 60%);
+}
+/* hide mobile scrollbar */
+.no-scrollbar::-webkit-scrollbar{ display:none; }
+.no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none; }
+
+/* full‑bleed row for small screens */
+.bleed-x{ margin-inline:calc(50% - 50vw); padding-inline:clamp(1rem, 4vw, 2rem); }

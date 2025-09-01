@@ -1,0 +1,97 @@
+/** @format */
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { CLEANING_CARDS } from "./_data";
+
+function CardItem({
+  href,
+  title,
+  cover,
+  note,
+  priority,
+}: {
+  href: string;
+  title: string;
+  cover: string;
+  note?: string;
+  priority?: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      aria-label={title}
+      className='group block overflow-hidden rounded-2xl border border-surface-2 bg-surface/45 shadow-sm transition hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60'>
+      <div className='relative aspect-[4/3]'>
+        <Image
+          src={cover}
+          alt={title}
+          fill
+          sizes='(min-width:1280px) 25vw, (min-width:768px) 33vw, 100vw'
+          priority={priority}
+          className='object-cover transition-transform duration-500 group-hover:scale-[1.04]'
+        />
+        <div className='absolute inset-0 z-10 bg-gradient-to-t from-[rgba(0,0,0,0.58)] via-[rgba(0,0,0,0.28)] to-transparent' />
+        {note && (
+          <span className='absolute right-2 top-2 z-20 rounded-full bg-red-600/90 px-3 py-1 text-[11px] font-semibold text-white'>
+            {note}
+          </span>
+        )}
+        <div className='absolute inset-x-0 bottom-0 z-20 p-3 sm:p-4'>
+          <h3 className='text-right text-base sm:text-lg font-semibold text-white drop-shadow'>
+            {title}
+          </h3>
+          <p className='mt-0.5 flex items-center justify-end gap-1 text-right text-[11px] sm:text-xs text-white/85 group-hover:text-primary'>
+            أنقر للمزيد{" "}
+            <span aria-hidden className='text-sm'>
+              →
+            </span>
+          </p>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+export default function CleaningHome() {
+  return (
+    <main className='container py-10 md:py-12 space-y-8'>
+      {/* HERO */}
+      <header className='relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/90 to-secondary/80 px-6 py-14 md:py-16 text-center shadow-xl'>
+        <h1 className='text-3xl md:text-4xl font-extrabold text-white tracking-tight'>
+          خدمة النظافة
+        </h1>
+        <p className='mt-3 text-white/90'>
+          اختر فئة الخدمة للتفاصيل. تصميم متجاوب يعمل بسلاسة على الهاتف
+          والكمبيوتر.
+        </p>
+        <div className='mx-auto mt-5 flex flex-wrap justify-center gap-2'>
+          {["فيلات", "شركات ومولات", "قرى سياحية", "خدمات أخرى"].map((t) => (
+            <span
+              key={t}
+              className='rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs text-white/85'>
+              {t}
+            </span>
+          ))}
+        </div>
+      </header>
+
+      {/* GRID */}
+      <section
+        className='grid gap-5 sm:grid-cols-2 xl:grid-cols-4'
+        aria-label='فئات خدمات النظافة'>
+        {CLEANING_CARDS.map((c, i) => (
+          <CardItem
+            key={c.href}
+            href={c.href}
+            title={c.title}
+            cover={c.cover}
+            note={c.note}
+            priority={i === 0}
+          />
+        ))}
+      </section>
+    </main>
+  );
+}
