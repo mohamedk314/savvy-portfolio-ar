@@ -3,6 +3,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { EXTRAS } from "./_data";
 
@@ -45,18 +46,16 @@ function Card({
   );
 }
 
-
-export default function ExtrasPage() {
+/* ---- Client subtree that uses useSearchParams ---- */
+function ExtrasInner() {
   const params = useSearchParams();
   const router = useRouter();
   const slug = params.get("slug");
   const svc = EXTRAS.find((e) => e.slug === slug);
 
-  // --- GRID (no slug) ---
   if (!svc) {
     return (
       <main className='container py-10 md:py-12 space-y-8'>
-        {/* HERO */}
         <header className='relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/90 to-secondary/80 px-6 py-14 md:py-16 text-center shadow-xl'>
           <h1 className='text-3xl md:text-4xl font-extrabold text-white tracking-tight'>
             خدمات أخرى
@@ -66,7 +65,6 @@ export default function ExtrasPage() {
           </p>
         </header>
 
-        {/* GRID */}
         <section
           aria-label='قائمة الخدمات الإضافية'
           className='grid gap-5 sm:grid-cols-2 xl:grid-cols-4'>
@@ -75,7 +73,7 @@ export default function ExtrasPage() {
               key={s.slug}
               title={s.title}
               img={s.thumb}
-              href={`?slug=${s.slug}`}
+              href={`/cleaning/extras/?slug=${s.slug}`} // absolute path safer for static export
             />
           ))}
         </section>
@@ -83,10 +81,8 @@ export default function ExtrasPage() {
     );
   }
 
-  // --- DETAIL (with slug) ---
   return (
     <main className='container py-10 md:py-12 space-y-8'>
-      {/* HERO + APP LINKS */}
       <header className='relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/90 to-secondary/80 px-6 py-14 md:py-16 text-center shadow-xl'>
         <h1 className='text-3xl md:text-4xl font-extrabold text-white tracking-tight'>
           {svc.title}
@@ -119,7 +115,6 @@ export default function ExtrasPage() {
         </div>
       </header>
 
-      {/* COVER + DETAILS */}
       <section className='rounded-3xl border border-surface-2 bg-surface-2/60 overflow-hidden'>
         <div className='grid md:grid-cols-2'>
           <div className='relative aspect-[16/10] md:aspect-auto md:min-h-[420px]'>
@@ -144,7 +139,7 @@ export default function ExtrasPage() {
             <div className='mt-6 flex flex-wrap gap-3 justify-end'>
               <button
                 type='button'
-                onClick={() => router.push("/cleaning/extras")}
+                onClick={() => (window.location.href = "/cleaning/extras/")}
                 className='rounded-lg border border-surface-2 bg-surface/40 px-4 py-2 text-white hover:bg-surface-2'>
                 ← عودة إلى جميع الخدمات
               </button>
@@ -153,5 +148,14 @@ export default function ExtrasPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+/* ---- Page exports a Suspense boundary ---- */
+export default function ExtrasPage() {
+  return (
+    <Suspense fallback={null}>
+      <ExtrasInner />
+    </Suspense>
   );
 }
