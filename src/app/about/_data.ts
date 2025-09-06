@@ -91,6 +91,7 @@ export const ABOUT = {
     { name: "SCOPE", logo: "/images/about/partners/scope.png" },
     { name: "GMA", logo: "/images/about/partners/gma.png" },
     { name: "TCL/راميكس", logo: "/images/about/partners/tcl.png" },
+    { name: "Tarollrrtours", logo: "/images/about/partners/tarol.png" },
     {
       name: "سافي للصناعات التعدينية",
       logo: "/images/about/partners/safy-mining.png",
