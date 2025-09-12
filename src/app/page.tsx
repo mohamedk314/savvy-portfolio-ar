@@ -3,8 +3,101 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { slides } from "../data/heroSlides";
+import { REVIEWS } from "./_data_customer_rev";
+
+/* ------- small helpers ------- */
+function Stars({ n }: { n: 1 | 2 | 3 | 4 | 5 }) {
+  return (
+    <div
+      className='inline-flex items-center gap-0.5'
+      aria-label={`تقييم ${n} من 5`}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <span
+          key={i}
+          className={i < n ? "text-yellow-400" : "text-white/25"}
+          aria-hidden>
+          ★
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function ReviewCard({
+  name,
+  role,
+  avatar,
+  rating,
+  comment,
+  service,
+  date,
+  photos,
+  attachment,
+}: (typeof REVIEWS)[number]) {
+  return (
+    <article className='rounded-2xl border border-surface-2 bg-surface/45 p-4 md:p-5 shadow-sm hover:shadow-md transition text-right'>
+      {/* Header */}
+      <div className='flex items-center justify-end gap-3'>
+        <div className='text-right'>
+          <div className='font-semibold text-white'>{name}</div>
+          <div className='text-[12px] text-white/60'>
+            {role ? `${role} · ` : ""}
+            {service || "—"}
+            {date ? ` · ${date}` : ""}
+          </div>
+        </div>
+        <Image
+          src={avatar || "/images/reviews/blank-user.png"} // fallback to blank PP
+          alt={name}
+          width={44}
+          height={44}
+          className='rounded-full object-cover border border-white/10'
+        />
+      </div>
+
+      {/* Stars */}
+      <div className='mt-2 flex items-center justify-end'>
+        <Stars n={rating} />
+      </div>
+
+      {/* Comment */}
+      <p className='p mt-2'>{comment}</p>
+
+      {/* Optional photos */}
+      {photos && photos.length > 0 && (
+        <div className='mt-3 grid grid-cols-3 gap-2'>
+          {photos.map((p) => (
+            <div
+              key={p}
+              className='relative aspect-square overflow-hidden rounded-lg'>
+              <Image
+                src={p}
+                alt='صورة من العميل'
+                fill
+                className='object-cover'
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Optional PDF attachment */}
+      {attachment && (
+        <div className='mt-4'>
+          <a
+            href={attachment}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='inline-flex items-center gap-2 rounded-lg border border-primary bg-primary/20 px-3 py-1 text-sm text-primary hover:bg-primary/30 transition'>
+            📎 تحميل المرفق
+          </a>
+        </div>
+      )}
+    </article>
+  );
+}
 
 export default function Page() {
   const [idx, setIdx] = useState(0);
@@ -16,22 +109,17 @@ export default function Page() {
     typeof window !== "undefined" &&
     window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
-  const next = () => setIdx((p) => (p + 1) % len);
-  const prev = () => setIdx((p) => (p - 1 + len) % len);
+  const next = useCallback(() => setIdx((p) => (p + 1) % len), [len]);
+  const prev = useCallback(() => setIdx((p) => (p - 1 + len) % len), [len]);
 
   useEffect(() => {
-    if (reduceMotion) return; // هنا خلاص مش بيرجع حاجة، فهي void
-
+    if (reduceMotion) return;
     timer.current = setInterval(next, 4000);
-
     return () => {
-      if (timer.current) {
-        clearInterval(timer.current);
-        timer.current = null; // reset
-      }
+      if (timer.current) clearInterval(timer.current);
+      timer.current = null;
     };
   }, [next, reduceMotion]);
-  
 
   const bump = (fn: () => void) => {
     if (timer.current) clearInterval(timer.current);
@@ -41,15 +129,11 @@ export default function Page() {
 
   // drag / swipe for mobile
   const startX = useRef<number | null>(null);
-  const onPointerDown = (e: React.PointerEvent) => {
-    startX.current = e.clientX;
-  };
+  const onPointerDown = (e: React.PointerEvent) => (startX.current = e.clientX);
   const onPointerUp = (e: React.PointerEvent) => {
     if (startX.current == null) return;
     const dx = e.clientX - startX.current;
-    if (Math.abs(dx) > 35) {
-      bump(() => (dx > 0 ? prev() : next()));
-    }
+    if (Math.abs(dx) > 35) bump(() => (dx > 0 ? prev() : next()));
     startX.current = null;
   };
 
@@ -70,7 +154,6 @@ export default function Page() {
             tabIndex={0}
             aria-roledescription='carousel'
             aria-label='الخدمات الرئيسية'>
-            {/* aspect: أعلى قراءة على الموبايل */}
             <div
               className='relative aspect-[16/9] sm:aspect-[16/7] lg:aspect-[16/6]'
               onPointerDown={onPointerDown}
@@ -102,10 +185,8 @@ export default function Page() {
                       priority={i === 0}
                       className='object-cover'
                     />
-                    {/* طبقة تحسين قراءة النص + تدرج جانبي خفيف */}
                     <div className='absolute inset-0 z-10 bg-gradient-to-t from-[rgba(0,0,0,0.55)] via-[rgba(0,0,0,0.25)] to-transparent' />
                     <div className='absolute inset-y-0 right-0 w-1/3 z-10 bg-gradient-to-l from-[rgba(0,0,0,0.25)] to-transparent pointer-events-none' />
-                    {/* عنوان الشريحة وCTA */}
                     <div className='absolute bottom-4 right-4 z-20 max-w-[92%] sm:max-w-md'>
                       <span className='inline-block rounded-xl bg-[color:rgb(23_29_43_/_0.7)] px-3 py-1 text-[13px] leading-none text-white/90 border border-white/10'>
                         خدمة سافي
@@ -126,7 +207,7 @@ export default function Page() {
                 );
               })}
 
-              {/* أزرار الأسهم — لمسة كبيرة للموبايل */}
+              {/* arrows */}
               <button
                 type='button'
                 aria-label='الشريحة السابقة'
@@ -142,7 +223,7 @@ export default function Page() {
                 ›
               </button>
 
-              {/* نقاط المؤشر المرقّمة */}
+              {/* dots */}
               <div className='absolute left-1/2 -translate-x-1/2 bottom-3 z-30 flex items-center gap-2 rounded-full bg-[rgba(0,0,0,0.35)] px-2 py-1'>
                 {slides.map((s, i) => (
                   <button
@@ -187,6 +268,49 @@ export default function Page() {
               <p className='p mt-1'>{b.d}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* REVIEWS */}
+      <section className='container py-10 md:py-12'>
+        <div className='mb-4 text-right'>
+          <h2 className='text-2xl md:text-3xl font-extrabold text-white tracking-tight'>
+            آراء العملاء
+          </h2>
+          <p className='text-white/75 mt-1 text-sm'>
+            آراء حقيقية تم تجميعها من عملائنا — يمكنك إضافة المزيد من المراجعات
+            من ملف البيانات.
+          </p>
+        </div>
+
+        <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
+          {REVIEWS.map((rv) => (
+            <ReviewCard key={rv.id} {...rv} />
+          ))}
+        </div>
+      </section>
+
+      {/* VIDEO (placeholder until you add a file) */}
+      <section className='container pb-14'>
+        <div className='rounded-3xl border border-surface-2 bg-surface/45 p-4 md:p-6'>
+          <h3 className='text-right text-xl font-semibold text-white mb-3'>
+            فيديو تعريفي
+          </h3>
+          <div className='relative aspect-video overflow-hidden rounded-2xl bg-black'>
+            {/* TODO: ضع الفيديو هنا:
+                1) ضع الملف في: /public/videos/intro.mp4
+                2) أو غيّر src بالمسار الذي تريده
+            */}
+            <video
+              className='h-full w-full'
+              controls
+              preload='metadata'
+              poster='/images/heroSlides/images.png' /* صورة الغلاف */
+            >
+              <source src='/videos/intro.mp4' type='video/mp4' />
+              متصفحك لا يدعم تشغيل الفيديو.
+            </video>
+          </div>
         </div>
       </section>
     </main>
