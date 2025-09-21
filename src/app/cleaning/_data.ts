@@ -14,22 +14,22 @@ export const CLEANING_CARDS: CleaningCard[] = [
   {
     href: "/cleaning/villas",
     title: "نظافة الفيلات",
-    cover: "/images/cleaning/aftertashteeb.jpg",
+    cover: "/images/cleaning/villas.jpg",
   },
   {
     href: "/cleaning/enterprises",
     title: "الشركات والمولات و المعارض و المؤسسات",
-    cover: "/images/cleaning/deepcleaning.jpg",
+    cover: "/images/cleaning/companies.jpg",
   },
   {
     href: "/cleaning/resorts",
     title: "نظافة القرى السياحية",
-    cover: "/images/heroSlides/images.png",
+    cover: "/images/cleaning/resorts.jpg",
     note: "غير متاح حالياً",
   },
   {
     href: "/cleaning/extras",
     title: "خدمات أخرى",
-    cover: "/images/heroSlides/images.png",
+    cover: "/images/cleaning/other.jpg",
   },
 ];

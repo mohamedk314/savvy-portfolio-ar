@@ -95,7 +95,10 @@ export default function EnterprisesPage() {
           الشركات والمولات والمؤسسات
         </h1>
         <p className='mt-3 text-white/90'>
-          برامج نظافة احترافية لمواقع عالية الحركة ومعايير سلامة وتشغيل ثابتة.
+          في سافي نقدم حلول متكاملة لإدارة وتنفيذ أعمال النظافة والصيانة في
+          المشاريع الضخمة والمساحات الواسعة مثل الشركات والمولات والمرافق
+          السياحية والمؤسسات الكبيرة، مع خطط مدروسة تناسب حجم أعمالكم بكفاءة
+          وضمن معايير احترافية عالية.
         </p>
       </header>
 
@@ -103,7 +106,7 @@ export default function EnterprisesPage() {
       <Segmented
         tabs={ENTERPRISES_SECTIONS.map((s) => ({
           key: s.key,
-          label: `${s.title} (${s.subtitle})`,
+          label: `${s.title}`,
         }))}
         value={tab}
         onChange={setTab}

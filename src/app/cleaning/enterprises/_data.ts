@@ -17,7 +17,7 @@ export const ENTERPRISES_SECTIONS: EnterprisesSection[] = [
   {
     key: "offices",
     title: "مكاتب وإدارات",
-    subtitle: "بيئات عمل نظيفة ومعقمة طوال اليوم",
+    subtitle: "",
     img: "/images/enterprises/offices-hero.jpg", // استبدل لاحقاً
     intro: [
       "تنظيف محطات العمل، غرف الاجتماعات، مناطق الاستقبال والانتظار.",
@@ -53,7 +53,7 @@ export const ENTERPRISES_SECTIONS: EnterprisesSection[] = [
   {
     key: "malls",
     title: "المولات والممرات التجارية",
-    subtitle: "تغطية عالية الحركة مع إجراءات سلامة",
+    subtitle: "",
     img: "/images/enterprises/malls-hero.jpg",
     intro: [
       "تنظيف ممرات، مصاعد، ساحات طعام، دورات مياه عامة.",
@@ -89,7 +89,7 @@ export const ENTERPRISES_SECTIONS: EnterprisesSection[] = [
   {
     key: "warehouses",
     title: "المؤسسات والمخازن",
-    subtitle: "تنظيف صناعي مع اشتراطات السلامة",
+    subtitle: "",
     img: "/images/enterprises/warehouses-hero.jpg",
     intro: [
       "تنظيف مستودعات، مناطق تحميل وتنزيل، مخارج طوارئ.",

@@ -23,14 +23,15 @@ function CardItem({
       href={href}
       aria-label={title}
       className='group block overflow-hidden rounded-2xl border border-surface-2 bg-surface/45 shadow-sm transition hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60'>
-      <div className='relative aspect-[4/3]'>
+      {/* match villa image ratio: 3:4 */}
+      <div className='relative aspect-[3/4]'>
         <Image
           src={cover}
           alt={title}
           fill
           sizes='(min-width:1280px) 25vw, (min-width:768px) 33vw, 100vw'
           priority={priority}
-          className='object-cover transition-transform duration-500 group-hover:scale-[1.04]'
+          className='object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]'
         />
         <div className='absolute inset-0 z-10 bg-gradient-to-t from-[rgba(0,0,0,0.58)] via-[rgba(0,0,0,0.28)] to-transparent' />
         {note && (
@@ -62,10 +63,7 @@ export default function CleaningHome() {
         <h1 className='text-3xl md:text-4xl font-extrabold text-white tracking-tight'>
           خدمة النظافة
         </h1>
-        <p className='mt-3 text-white/90'>
-          اختر فئة الخدمة للتفاصيل. تصميم متجاوب يعمل بسلاسة على الهاتف
-          والكمبيوتر.
-        </p>
+        <p className='mt-3 text-white/90'>أخنر خدمة النظافه المناسبه إليك.</p>
         <div className='mx-auto mt-5 flex flex-wrap justify-center gap-2'>
           {["فيلات", "شركات ومولات", "قرى سياحية", "خدمات أخرى"].map((t) => (
             <span

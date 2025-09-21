@@ -141,24 +141,6 @@ export default function VillasPage() {
                 </Card>
               ))}
             </div>
-
-            <div className='mt-6 grid gap-4 md:grid-cols-2'>
-              <Card title='المخرجات المتوقعة'>
-                <ul className='list-disc pr-5 text-sm text-white/80 space-y-1.5'>
-                  {current.deliverables.map((x) => (
-                    <li key={x}>{x}</li>
-                  ))}
-                </ul>
-              </Card>
-              <Card title='ملاحظات وتسعير تقريبي'>
-                <ul className='list-disc pr-5 text-sm text-white/80 space-y-1.5'>
-                  {current.pricingNotes.map((x) => (
-                    <li key={x}>{x}</li>
-                  ))}
-                </ul>
-              </Card>
-            </div>
-
             <Card title='بيانات مطلوبة من العميل'>
               <ul className='list-decimal pr-5 text-sm text-white/80 space-y-1.5'>
                 {current.askClient.map((x) => (
@@ -195,8 +177,7 @@ export default function VillasPage() {
           احجز خدمتك عبر التطبيق
         </h3>
         <p className='text-sm text-white/80'>
-          للحجز وإدارة المواعيد والمتابعة بالصور، يُرجى استخدام تطبيق سـافي. لا
-          يتم استقبال الطلبات عبر الهاتف أو البريد.
+          من خلال تطبيق سافي يمكنك الحجز بسهولة وبخطوات بسيطة
         </p>
         <div className='mt-5 flex flex-wrap gap-3 justify-end'>
           <a

@@ -14,18 +14,26 @@ export const slides: Slide[] = [
   {
     label: "خدمة مكافحة الحشرات",
     href: "/pest-control",
-    image: "/images/heroSlides/pest.jpg",
+    image: "/images/heroSlides/pest.jpeg",
   },
-  { label: "خدمة الحدائق", href: "/gardens", image: "/images/images.png" },
+  {
+    label: "خدمة الحدائق",
+    href: "/gardens",
+    image: "/images/heroSlides/gardens.jpeg",
+  },
   {
     label: "الكومباوندات والأندية والمولات",
     href: "/compounds-clubs-malls",
-    image: "/images/heroSlides/images.png",
+    image: "/images/heroSlides/compounds.jpeg",
   },
   {
     label: "الساحل الشمالي",
     href: "/north-coast",
-    image: "/images/heroSlides/images.png",
+    image: "/images/heroSlides/northcoast.jpeg",
   },
-  { label: "من نحن", href: "/about", image: "/images/heroSlides/images.png" },
+  {
+    label: "من نحن",
+    href: "/about",
+    image: "/images/heroSlides/companyprofile.jpeg",
+  },
 ];

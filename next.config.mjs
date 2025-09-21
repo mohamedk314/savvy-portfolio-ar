@@ -9,4 +9,16 @@ const nextConfig = {
   trailingSlash: true, // ensures /page/ → page/index.html works on Apache
 };
 
-export default nextConfig;
+// next.config.mjs
+const base = process.env.NEXT_BASE_PATH || "";
+
+/** @type {import('next').NextConfig} */
+const config = {
+  output: "export",            // تصدير ثابت
+  images: { unoptimized: true },
+  trailingSlash: true,
+  basePath: base,              // مهم لـ http://IP/~cpaneluser
+  assetPrefix: base,
+};
+
+export default config;

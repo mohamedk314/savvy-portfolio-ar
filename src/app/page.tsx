@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { slides } from "../data/heroSlides";
 import { REVIEWS } from "./_data_customer_rev";
-
+const SLIDE_MS = 7000;
 /* ------- small helpers ------- */
 function Stars({ n }: { n: 1 | 2 | 3 | 4 | 5 }) {
   return (
@@ -114,7 +114,7 @@ export default function Page() {
 
   useEffect(() => {
     if (reduceMotion) return;
-    timer.current = setInterval(next, 4000);
+    timer.current = setInterval(next, SLIDE_MS);
     return () => {
       if (timer.current) clearInterval(timer.current);
       timer.current = null;
@@ -124,7 +124,7 @@ export default function Page() {
   const bump = (fn: () => void) => {
     if (timer.current) clearInterval(timer.current);
     fn();
-    if (!reduceMotion) timer.current = setInterval(next, 4000);
+    if (!reduceMotion) timer.current = setInterval(next, SLIDE_MS);
   };
 
   // drag / swipe for mobile
@@ -160,7 +160,7 @@ export default function Page() {
               onPointerUp={onPointerUp}
               onMouseEnter={() => timer.current && clearInterval(timer.current)}
               onMouseLeave={() => {
-                if (!reduceMotion) timer.current = setInterval(next, 4000);
+                if (!reduceMotion) timer.current = setInterval(next, SLIDE_MS);
               }}>
               {slides.map((s, i) => {
                 const active = i === idx;
@@ -247,19 +247,31 @@ export default function Page() {
       {/* INTRO / VALUE PROPS */}
       <section className='container py-10 md:py-12'>
         <div className='text-right'>
-          <h1 className='h1'>مرحباً بكم في سافي</h1>
-          <p className='p mt-3'>
-            اختَر الخدمة المناسبة من الأعلى. الموقع متجاوب بالكامل، واضح على
-            الهاتف والكمبيوتر، ويقدّم وصولية محسّنة.
-          </p>
+          <h1 className='h1'> مرحبا بكم في ساڤي </h1>
+          <ul className='list-disc list-inside mt-3 space-y-1'>
+            نقدّم لكم خدمات متكاملة تلبي احتياجاتكم:
+            <li>نظافة</li>
+            <li>أمن</li>
+            <li>صيانة</li>
+            <li>تنسيق حدائق</li>
+            <li>خدمات أخرى</li>
+          </ul>
         </div>
 
         <div className='mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4'>
           {[
-            { t: "فريق محترف", d: "كوادر مدرّبة ومعدات معتمدة." },
-            { t: "مواعيد مرنة", d: "تنفيذ وفق جدولك اليومي/الأسبوعي." },
-            { t: "جودة مضمونة", d: "قوائم متابعة وتقارير عند الطلب." },
-            { t: "دعم سريع", d: "استجابة فورية للبلاغات العاجلة." },
+            {
+              t: "فريق العمل",
+              d: "يرتكز نجاحنا على فريق عمل مدرّب ومحترف لتقديم خدمات متكاملة بمعايير عالية الجودة.",
+            },
+            {
+              t: "مواعيد مرنة",
+              d: "نلتزم بتنفيذ الخدمة وفق جدولك اليومي / الأسبوعي.",
+            },
+            {
+              t: "جودة مضمونة",
+              d: "جودة متكاملة مدعومة بنظام متابعة وبطاقات تقييم لكل خدمة للتأكد من رضا عملائنا الكرام",
+            },
           ].map((b) => (
             <div
               key={b.t}
@@ -278,8 +290,7 @@ export default function Page() {
             آراء العملاء
           </h2>
           <p className='text-white/75 mt-1 text-sm'>
-            آراء حقيقية تم تجميعها من عملائنا — يمكنك إضافة المزيد من المراجعات
-            من ملف البيانات.
+            آراء تم تجميعها من عملائنا .
           </p>
         </div>
 
