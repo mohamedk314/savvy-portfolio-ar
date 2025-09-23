@@ -7,6 +7,7 @@ import { GARDEN } from "./_data";
 
 type TabKey = keyof typeof GARDEN;
 
+/* Segmented (sticky) */
 function Segmented({
   value,
   onChange,
@@ -33,14 +34,12 @@ function Segmented({
       <div
         className={
           "z-30 sticky top-14 md:top-16 transition-all " +
-          (stuck
-            ? "backdrop-blur bg-[color:rgb(15_20_32_/_0.55)] shadow-lg"
-            : "")
+          (stuck ? "backdrop-blur bg-surface/60 shadow-lg" : "")
         }>
         <div className='container py-3'>
           <div
             role='tablist'
-            className='mx-auto inline-flex flex-wrap justify-center gap-2 rounded-2xl border border-surface-2 bg-surface/40 p-1'>
+            className='mx-auto inline-flex flex-wrap justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 p-1'>
             {tabs.map((t) => (
               <button
                 key={t.key}
@@ -50,8 +49,8 @@ function Segmented({
                 className={
                   "rounded-xl px-4 py-2 text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 " +
                   (value === t.key
-                    ? "bg-primary/25 text-primary border border-primary shadow-sm"
-                    : "text-white/80 hover:text-white hover:bg-surface-2")
+                    ? "bg-primary/20 text-primary border border-primary shadow-sm"
+                    : "text-[--color-text]/80 hover:text-[--color-text] hover:bg-white/5 border border-transparent")
                 }>
                 {t.label}
               </button>
@@ -63,6 +62,7 @@ function Segmented({
   );
 }
 
+/* Block card */
 function BlockCard({
   title,
   children,
@@ -71,8 +71,8 @@ function BlockCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className='rounded-2xl border border-surface-2 bg-surface/45 p-5 md:p-6'>
-      <h3 className='mb-2 font-semibold text-white'>{title}</h3>
+    <div className='rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6'>
+      <h3 className='mb-2 font-semibold text-accent'>{title}</h3>
       {children}
     </div>
   );
@@ -84,17 +84,17 @@ export default function GardensPage() {
 
   return (
     <main className='container py-10 md:py-12 space-y-8'>
-      {/* HERO + Store links on top */}
+      {/* HERO + Store links */}
       <header className='relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/90 to-secondary/80 px-6 py-14 md:py-16 text-center shadow-xl'>
-        <h1 className='text-3xl md:text-4xl font-extrabold text-white tracking-tight'>
+        <h1 className='text-3xl md:text-4xl font-extrabold text-accent tracking-tight'>
           خدمة الحدائق
         </h1>
-        <p className='mt-3 text-white/90'>تصميم، توريد، تنفيذ، وصيانة دورية.</p>
+        <p className='p mt-3'>تصميم، توريد، تنفيذ، وصيانة دورية.</p>
 
         <div className='mt-6 flex flex-wrap gap-3 justify-center'>
           <a
             href='/download/ios'
-            className='flex items-center gap-2 rounded-lg bg-black px-4 py-2 text-white hover:opacity-90 transition'>
+            className='flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-[--color-text] hover:bg-primary/90 transition'>
             <Image
               src='/icons/apple.svg'
               alt='App Store'
@@ -105,7 +105,7 @@ export default function GardensPage() {
           </a>
           <a
             href='/download/android'
-            className='flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white hover:opacity-90 transition'>
+            className='flex items-center gap-2 rounded-lg bg-secondary px-4 py-2 text-[--color-text] hover:bg-secondary/90 transition'>
             <Image
               src='/icons/android.svg'
               alt='Google Play'
@@ -131,7 +131,7 @@ export default function GardensPage() {
       />
 
       {/* Content */}
-      <section className='rounded-3xl border border-surface-2 bg-surface-2/60 overflow-hidden'>
+      <section className='rounded-3xl border border-white/10 bg-white/5 overflow-hidden'>
         <div className='grid md:grid-cols-2'>
           {/* cover */}
           <div className='relative aspect-[16/10] md:aspect-auto md:min-h-[420px]'>
@@ -147,8 +147,8 @@ export default function GardensPage() {
 
           {/* text */}
           <div className='p-6 md:p-8 text-right'>
-            <h2 className='text-2xl font-bold text-white'>{section.title}</h2>
-            <p className='mt-1 text-white/70'>{section.subtitle}</p>
+            <h2 className='text-2xl font-bold text-accent'>{section.title}</h2>
+            <p className='p mt-1'>{section.subtitle}</p>
 
             <ul className='mt-4 list-disc pr-5 text-sm md:text-base text-white/85 space-y-1.5'>
               {section.bullets.map((b) => (
@@ -173,7 +173,7 @@ export default function GardensPage() {
               {section.gallery.map((src) => (
                 <div
                   key={src}
-                  className='relative aspect-[4/3] overflow-hidden rounded-lg'>
+                  className='relative aspect-[4/3] overflow-hidden rounded-lg border border-white/10 bg-white/5'>
                   <Image
                     src={src}
                     alt=''

@@ -20,6 +20,7 @@ function useReveal() {
   return { ref, show };
 }
 
+/* Segmented tabs (sticky) */
 function Segmented<T extends string>({
   tabs,
   value,
@@ -44,14 +45,12 @@ function Segmented<T extends string>({
       <div
         className={
           "z-30 sticky top-14 md:top-16 transition-all " +
-          (stuck
-            ? "backdrop-blur bg-[color:rgb(15_20_32_/_0.55)] shadow-lg"
-            : "")
+          (stuck ? "backdrop-blur bg-surface/60 shadow-lg" : "")
         }>
         <div className='container py-3'>
           <div
             role='tablist'
-            className='mx-auto inline-flex flex-wrap justify-center gap-2 rounded-2xl border border-surface-2 bg-surface/40 p-1'>
+            className='mx-auto inline-flex flex-wrap justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 p-1'>
             {tabs.map((t) => {
               const active = value === t.key;
               return (
@@ -63,8 +62,8 @@ function Segmented<T extends string>({
                   className={
                     "rounded-xl px-4 py-2 text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 " +
                     (active
-                      ? "bg-primary/25 text-primary border border-primary shadow-sm"
-                      : "text-white/80 hover:text-white hover:bg-surface-2")
+                      ? "bg-primary/20 text-primary border border-primary shadow-sm"
+                      : "text-[--color-text]/80 hover:text-[--color-text] hover:bg-white/5 border border-transparent")
                   }>
                   {t.label}
                 </button>
@@ -91,7 +90,7 @@ function SubCard({
     <article
       ref={ref}
       className={
-        "overflow-hidden rounded-2xl border border-surface-2 bg-surface/45 shadow-sm transition " +
+        "overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-sm transition " +
         (show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3")
       }>
       <div className='relative aspect-[16/9]'>
@@ -104,7 +103,7 @@ function SubCard({
         />
       </div>
       <div className='p-5 md:p-6 text-right'>
-        <h3 className='mb-2 text-lg font-semibold text-primary'>{title}</h3>
+        <h3 className='mb-2 text-lg font-semibold text-accent'>{title}</h3>
         <ul className='list-disc pr-5 text-sm text-white/85 space-y-1.5'>
           {bullets.map((b) => (
             <li key={b}>{b}</li>
@@ -122,20 +121,47 @@ export default function NorthCoastPage() {
 
   return (
     <main className='container py-10 md:py-12 space-y-8'>
-      {/* HERO + note */}
+      {/* HERO + note + store CTAs */}
       <header className='relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/90 to-secondary/80 px-6 py-14 md:py-16 text-center shadow-xl'>
-        <h1 className='text-3xl md:text-4xl font-extrabold text-white tracking-tight'>
-          خدمات الساحل الشمالي
+        <h1 className='text-3xl md:text-4xl font-extrabold text-accent tracking-tight'>
+          خدمات القرى السياحية
         </h1>
-        <p className='mt-3 text-white/90'>
+        <p className='p mt-3'>
           حلول تشغيل للمواقع العامة وخدمات للوحدات الخاصة داخل القرى السياحية.
         </p>
-        <div className='mx-auto mt-5 inline-flex items-center gap-2 rounded-xl bg-red-700/85 px-5 py-3 text-white shadow-md'>
+
+        <div className='mt-6 inline-flex items-center gap-2 rounded-xl bg-accent/15 px-5 py-3 text-accent'>
           <span aria-hidden>🚧</span>
           <span>
             الخدمة غير مفعّلة حالياً — الصفحة تعريفية وسيتم التشغيل قريباً
           </span>
           <span aria-hidden>🚧</span>
+        </div>
+
+        {/* Store CTAs (added like other pages) */}
+        <div className='mt-6 flex flex-wrap gap-3 justify-center'>
+          <a
+            href='/download/ios'
+            className='flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-[--color-text] hover:bg-primary/90 transition'>
+            <Image
+              src='/icons/apple.svg'
+              alt='App Store'
+              width={18}
+              height={18}
+            />
+            <span className='text-sm'>تحميل على App Store</span>
+          </a>
+          <a
+            href='/download/android'
+            className='flex items-center gap-2 rounded-lg bg-secondary px-4 py-2 text-[--color-text] hover:bg-secondary/90 transition'>
+            <Image
+              src='/icons/android.svg'
+              alt='Google Play'
+              width={18}
+              height={18}
+            />
+            <span className='text-sm'>تنزيل من Google Play</span>
+          </a>
         </div>
       </header>
 
@@ -147,9 +173,9 @@ export default function NorthCoastPage() {
       />
 
       {/* category intro */}
-      <section className='rounded-3xl border border-surface-2 bg-surface-2/60 p-6 md:p-8 text-right'>
-        <h2 className='text-2xl font-bold text-white'>{current.title}</h2>
-        <p className='mt-1 text-white/70'>{current.subtitle}</p>
+      <section className='rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 text-right'>
+        <h2 className='text-2xl font-bold text-accent'>{current.title}</h2>
+        <p className='p mt-1'>{current.subtitle}</p>
         <ul className='mt-4 list-disc pr-5 text-sm md:text-base text-white/85 space-y-1.5'>
           {current.intro.map((x) => (
             <li key={x}>{x}</li>
@@ -169,18 +195,18 @@ export default function NorthCoastPage() {
         ))}
       </section>
 
-      {/* store CTAs (optional – keep consistent with other pages) */}
-      <section className='rounded-2xl border border-surface-2 bg-surface/45 p-5 md:p-6 text-right'>
-        <h3 className='font-semibold mb-2 text-white'>
+      {/* store CTAs at bottom */}
+      <section className='rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6 text-right'>
+        <h3 className='font-semibold mb-2 text-accent'>
           الحجز والمتابعة عبر التطبيق
         </h3>
-        <p className='text-sm text-white/80'>
+        <p className='p'>
           سيتم فتح الحجز قريباً، وسيكون حصرياً عبر تطبيق سافي.
         </p>
         <div className='mt-5 flex flex-wrap gap-3 justify-end'>
           <a
             href='/download/ios'
-            className='flex items-center gap-2 rounded-lg bg-black px-4 py-2 text-white hover:opacity-90 transition'>
+            className='flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-[--color-text] hover:bg-primary/90 transition'>
             <Image
               src='/icons/apple.svg'
               alt='App Store'
@@ -191,7 +217,7 @@ export default function NorthCoastPage() {
           </a>
           <a
             href='/download/android'
-            className='flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white hover:opacity-90 transition'>
+            className='flex items-center gap-2 rounded-lg bg-secondary px-4 py-2 text-[--color-text] hover:bg-secondary/90 transition'>
             <Image
               src='/icons/android.svg'
               alt='Google Play'

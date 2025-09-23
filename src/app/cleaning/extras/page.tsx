@@ -4,7 +4,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { EXTRAS } from "./_data";
 
 function Card({
@@ -20,7 +20,7 @@ function Card({
     <Link
       href={href}
       aria-label={title}
-      className='group block overflow-hidden rounded-2xl border border-surface-2 bg-surface/45 shadow-sm hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60'>
+      className='group block overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-sm hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60'>
       <div className='relative aspect-[4/3]'>
         <Image
           src={img}
@@ -31,10 +31,10 @@ function Card({
         />
         <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent' />
         <div className='absolute inset-x-0 bottom-0 z-10 p-3 sm:p-4'>
-          <h3 className='text-right text-base sm:text-lg font-semibold text-white drop-shadow'>
+          <h3 className='text-right text-base sm:text-lg font-semibold text-accent drop-shadow'>
             {title}
           </h3>
-          <p className='mt-0.5 flex items-center justify-end gap-1 text-right text-[11px] sm:text-xs text-white/85 group-hover:text-primary'>
+          <p className='mt-0.5 flex items-center justify-end gap-1 text-right text-[11px] sm:text-xs text-[--color-text]/85 group-hover:text-primary'>
             أنقر للمزيد{" "}
             <span aria-hidden className='text-sm'>
               →
@@ -49,7 +49,6 @@ function Card({
 /* ---- Client subtree that uses useSearchParams ---- */
 function ExtrasInner() {
   const params = useSearchParams();
-  const router = useRouter();
   const slug = params.get("slug");
   const svc = EXTRAS.find((e) => e.slug === slug);
 
@@ -57,10 +56,10 @@ function ExtrasInner() {
     return (
       <main className='container py-10 md:py-12 space-y-8'>
         <header className='relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/90 to-secondary/80 px-6 py-14 md:py-16 text-center shadow-xl'>
-          <h1 className='text-3xl md:text-4xl font-extrabold text-white tracking-tight'>
+          <h1 className='text-3xl md:text-4xl font-extrabold text-accent tracking-tight'>
             خدمات أخرى
           </h1>
-          <p className='mt-3 text-white/90'>
+          <p className='p mt-3'>
             خدمات إضافية مكمّلة لتنظيف المنازل والمنشآت — احجزها عبر التطبيق.
           </p>
         </header>
@@ -73,7 +72,7 @@ function ExtrasInner() {
               key={s.slug}
               title={s.title}
               img={s.thumb}
-              href={`/cleaning/extras/?slug=${s.slug}`} // absolute path safer for static export
+              href={`/cleaning/extras/?slug=${s.slug}`}
             />
           ))}
         </section>
@@ -84,15 +83,15 @@ function ExtrasInner() {
   return (
     <main className='container py-10 md:py-12 space-y-8'>
       <header className='relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/90 to-secondary/80 px-6 py-14 md:py-16 text-center shadow-xl'>
-        <h1 className='text-3xl md:text-4xl font-extrabold text-white tracking-tight'>
+        <h1 className='text-3xl md:text-4xl font-extrabold text-accent tracking-tight'>
           {svc.title}
         </h1>
-        <p className='mt-3 text-white/90'>{svc.desc}</p>
+        <p className='p mt-3'>{svc.desc}</p>
 
         <div className='mt-6 flex flex-wrap gap-3 justify-center'>
           <a
             href='/download/ios'
-            className='flex items-center gap-2 rounded-lg bg-black px-4 py-2 text-white hover:opacity-90 transition'>
+            className='flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-[--color-text] hover:bg-primary/90 transition'>
             <Image
               src='/icons/apple.svg'
               alt='App Store'
@@ -103,7 +102,7 @@ function ExtrasInner() {
           </a>
           <a
             href='/download/android'
-            className='flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white hover:opacity-90 transition'>
+            className='flex items-center gap-2 rounded-lg bg-secondary px-4 py-2 text-[--color-text] hover:bg-secondary/90 transition'>
             <Image
               src='/icons/android.svg'
               alt='Google Play'
@@ -115,7 +114,7 @@ function ExtrasInner() {
         </div>
       </header>
 
-      <section className='rounded-3xl border border-surface-2 bg-surface-2/60 overflow-hidden'>
+      <section className='rounded-3xl border border-white/10 bg-white/5 overflow-hidden'>
         <div className='grid md:grid-cols-2'>
           <div className='relative aspect-[16/10] md:aspect-auto md:min-h-[420px]'>
             <Image
@@ -129,7 +128,9 @@ function ExtrasInner() {
           </div>
 
           <div className='p-6 md:p-8 text-right'>
-            <h2 className='text-2xl font-bold text-white'>ماذا تشمل الخدمة؟</h2>
+            <h2 className='text-2xl font-bold text-accent'>
+              ماذا تشمل الخدمة؟
+            </h2>
             <ul className='mt-3 list-disc pr-5 text-sm md:text-base text-white/85 space-y-1.5'>
               {svc.includes.map((i) => (
                 <li key={i}>{i}</li>
@@ -137,12 +138,11 @@ function ExtrasInner() {
             </ul>
 
             <div className='mt-6 flex flex-wrap gap-3 justify-end'>
-              <button
-                type='button'
-                onClick={() => (window.location.href = "/cleaning/extras/")}
-                className='rounded-lg border border-surface-2 bg-surface/40 px-4 py-2 text-white hover:bg-surface-2'>
+              <Link
+                href='/cleaning/extras/'
+                className='rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-[--color-text] hover:bg-white/10 transition'>
                 ← عودة إلى جميع الخدمات
-              </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -14,8 +14,8 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <div className='rounded-2xl border border-surface-2 bg-surface/45 p-5 md:p-6'>
-      <h3 className='mb-2 font-semibold text-white'>{title}</h3>
+    <div className='rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6'>
+      <h3 className='mb-2 font-semibold text-accent'>{title}</h3>
       {children}
     </div>
   );
@@ -47,14 +47,12 @@ function Segmented<T extends string>({
       <div
         className={
           "z-30 sticky top-14 md:top-16 transition-all " +
-          (stuck
-            ? "backdrop-blur bg-[color:rgb(15_20_32_/_0.55)] shadow-lg"
-            : "")
+          (stuck ? "backdrop-blur bg-surface/60 shadow-lg" : "")
         }>
         <div className='container py-3'>
           <div
             role='tablist'
-            className='mx-auto inline-flex flex-wrap justify-center gap-2 rounded-2xl border border-surface-2 bg-surface/40 p-1'>
+            className='mx-auto inline-flex flex-wrap justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 p-1'>
             {tabs.map((t) => {
               const active = value === t.key;
               return (
@@ -66,8 +64,8 @@ function Segmented<T extends string>({
                   className={
                     "rounded-xl px-4 py-2 text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 " +
                     (active
-                      ? "bg-primary/25 text-primary border border-primary shadow-sm"
-                      : "text-white/80 hover:text-white hover:bg-surface-2")
+                      ? "bg-primary/20 text-primary border border-primary shadow-sm"
+                      : "text-[--color-text]/80 hover:text-[--color-text] hover:bg-white/5 border border-transparent")
                   }>
                   {t.label}
                 </button>
@@ -90,21 +88,20 @@ export default function ResortsPage() {
     <main className='container py-10 md:py-12 space-y-8'>
       {/* HERO */}
       <header className='relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/90 to-secondary/80 px-6 py-14 md:py-16 text-center shadow-xl'>
-        <h1 className='text-3xl md:text-4xl font-extrabold text-white tracking-tight'>
+        <h1 className='text-3xl md:text-4xl font-extrabold text-accent tracking-tight'>
           نظافة القرى السياحية
         </h1>
-        <p className='mt-3 text-white/90'>
-          خدمات موسمية / يومية وفق الجداول التشغيلية
-        </p>
+        <p className='p mt-3'>خدمات موسمية / يومية وفق الجداول التشغيلية</p>
 
-        {/* Unavailable note (non-blocking) */}
-        <div className='mt-6 inline-flex items-center gap-2 rounded-xl bg-red-700/85 px-5 py-3 text-white shadow-md'>
+        {/* Unavailable note */}
+        {/*
+        <div className='mt-6 inline-flex items-center gap-2 rounded-xl bg-accent/15 px-5 py-3 text-accent'>
           <span aria-hidden>🚧</span>
           <span>
             الخدمة غير مفعّلة حالياً داخل الشركة — المحتوى أدناه للتعريف فقط
           </span>
           <span aria-hidden>🚧</span>
-        </div>
+        </div>*/}
       </header>
 
       {/* STICKY SEGMENTED TABS */}
@@ -118,24 +115,23 @@ export default function ResortsPage() {
       />
 
       {/* CONTENT */}
-      <section className='rounded-3xl border border-surface-2 bg-surface-2/60 overflow-hidden'>
+      <section className='rounded-3xl border border-white/10 bg-white/5 overflow-hidden'>
         <div className='grid md:grid-cols-2'>
-          {/* image */}
-          <div className='relative aspect-[16/10] md:aspect-auto md:min-h-[420px]'>
+          <div className='relative w-full overflow-hidden rounded-3xl [padding-bottom:125%] md:[padding-bottom:56.25%]'>
             <Image
               src={current.img}
               alt={current.title}
               fill
-              sizes='(min-width:1024px) 50vw, 100vw'
-              className='object-cover'
+              sizes='(min-width:1024px) 60vw, 100vw'
+              className='object-contain md:object-cover md:object-center'
               priority
             />
           </div>
 
           {/* text */}
           <div className='p-6 md:p-8 text-right'>
-            <h2 className='text-2xl font-bold text-white'>{current.title}</h2>
-            <p className='mt-1 text-white/70'>{current.subtitle}</p>
+            <h2 className='text-2xl font-bold text-accent'>{current.title}</h2>
+            <p className='p mt-1'>{current.subtitle}</p>
 
             <ul className='mt-4 list-disc pr-5 text-sm md:text-base text-white/85 space-y-1.5'>
               {current.intro.map((t) => (
@@ -172,11 +168,11 @@ export default function ResortsPage() {
               </Card>
             </div>
 
-            {/* Store-only CTA (informational while service is inactive) */}
+            {/* Store-only CTA */}
             <div className='mt-6 flex flex-wrap gap-3 justify-end'>
               <a
                 href='/download/ios'
-                className='flex items-center gap-2 rounded-lg bg-black px-4 py-2 text-white hover:opacity-90 transition'>
+                className='flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-[--color-text] hover:bg-primary/90 transition'>
                 <Image
                   src='/icons/apple.svg'
                   alt='App Store'
@@ -187,7 +183,7 @@ export default function ResortsPage() {
               </a>
               <a
                 href='/download/android'
-                className='flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white hover:opacity-90 transition'>
+                className='flex items-center gap-2 rounded-lg bg-secondary px-4 py-2 text-[--color-text] hover:bg-secondary/90 transition'>
                 <Image
                   src='/icons/android.svg'
                   alt='Google Play'

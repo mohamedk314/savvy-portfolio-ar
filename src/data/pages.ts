@@ -10,6 +10,6 @@ export const pageLinks: PageLink[] = [
     href: "/compounds-clubs-malls",
     label: "خدمة الكومباوندات والأندية والمولات",
   },
-  { href: "/north-coast", label: "خدمات الساحل الشمالي" },
+  { href: "/north-coast", label: "خدمات القرى السياحية" },
   { href: "/about", label: "من نحن" },
 ];

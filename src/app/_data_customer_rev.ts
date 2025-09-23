@@ -48,6 +48,36 @@ export const REVIEWS: Review[] = [
     date: "2024-06-21",
     attachment: "/attachments/reviews/review3.pdf",
   },
+  {
+    id: "rv-004",
+    name: "م. xxx علي",
+    role: "مالك فيلا",
+    rating: 5,
+    comment:
+      "تنفيذ ممتاز وسريع، المتابعة بالصور كانت واضحة. التجربة كلها سلسة.",
+    service: "نظافة عميقة",
+    date: "2024-07-12",
+    attachment: "/attachments/reviews/review1.pdf", // PDF sample
+  },
+  {
+    id: "rv-005",
+    name: "أ. xxxx سمير",
+    role: "مديرة تشغيل",
+    rating: 4,
+    comment: "فريق منظم ومعدات نظيفة. فيه ملاحظات بسيطة واتقفينا على تحسينها.",
+    service: "المولات",
+    date: "2024-08-03",
+    attachment: "/attachments/reviews/review2.pdf",
+  },
+  {
+    id: "rv-006",
+    name: "م. xxxx حسن",
+    rating: 5,
+    comment: "مكافحة فعّالة بدون روائح مزعجة، والشرح كان مطمّن. شكراً!",
+    service: "مكافحة الحشرات",
+    date: "2024-06-21",
+    attachment: "/attachments/reviews/review3.pdf",
+  },
 ];
 
 /* ملاحظات:

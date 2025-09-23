@@ -22,8 +22,8 @@ function CardItem({
     <Link
       href={href}
       aria-label={title}
-      className='group block overflow-hidden rounded-2xl border border-surface-2 bg-surface/45 shadow-sm transition hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60'>
-      {/* match villa image ratio: 3:4 */}
+      className='group block overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-sm transition hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60'>
+      {/* 3:4 image */}
       <div className='relative aspect-[3/4]'>
         <Image
           src={cover}
@@ -35,15 +35,15 @@ function CardItem({
         />
         <div className='absolute inset-0 z-10 bg-gradient-to-t from-[rgba(0,0,0,0.58)] via-[rgba(0,0,0,0.28)] to-transparent' />
         {note && (
-          <span className='absolute right-2 top-2 z-20 rounded-full bg-red-600/90 px-3 py-1 text-[11px] font-semibold text-white'>
+          <span className='absolute right-2 top-2 z-20 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold text-black/90'>
             {note}
           </span>
         )}
         <div className='absolute inset-x-0 bottom-0 z-20 p-3 sm:p-4'>
-          <h3 className='text-right text-base sm:text-lg font-semibold text-white drop-shadow'>
+          <h3 className='text-right text-base sm:text-lg font-semibold text-accent drop-shadow'>
             {title}
           </h3>
-          <p className='mt-0.5 flex items-center justify-end gap-1 text-right text-[11px] sm:text-xs text-white/85 group-hover:text-primary'>
+          <p className='mt-0.5 flex items-center justify-end gap-1 text-right text-[11px] sm:text-xs text-[--color-text]/85 group-hover:text-primary'>
             أنقر للمزيد{" "}
             <span aria-hidden className='text-sm'>
               →
@@ -60,15 +60,20 @@ export default function CleaningHome() {
     <main className='container py-10 md:py-12 space-y-8'>
       {/* HERO */}
       <header className='relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/90 to-secondary/80 px-6 py-14 md:py-16 text-center shadow-xl'>
-        <h1 className='text-3xl md:text-4xl font-extrabold text-white tracking-tight'>
+        <h1 className='text-3xl md:text-4xl font-extrabold text-accent tracking-tight'>
           خدمة النظافة
         </h1>
-        <p className='mt-3 text-white/90'>أخنر خدمة النظافه المناسبه إليك.</p>
+        <p className='p mt-3'>أختر خدمة النظافه المناسبه إليك.</p>
         <div className='mx-auto mt-5 flex flex-wrap justify-center gap-2'>
-          {["فيلات", "شركات ومولات", "قرى سياحية", "خدمات أخرى"].map((t) => (
+          {[
+            "وحدات سكنية",
+            " شركات و مولات و مصانع",
+            "قرى سياحية",
+            "خدمات أخرى",
+          ].map((t) => (
             <span
               key={t}
-              className='rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs text-white/85'>
+              className='rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs text-primary'>
               {t}
             </span>
           ))}

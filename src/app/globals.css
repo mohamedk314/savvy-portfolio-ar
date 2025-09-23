@@ -1,59 +1,120 @@
 @import "tailwindcss";
-@source "../**/*.{ts,tsx,js,jsx,mdx,html}";
 
-/* SAVVY palette with darker bg + navbar/footer */
+/* Tell Tailwind where to scan (v4) */
+@source "./app/**/*.{ts,tsx,js,jsx,mdx}";
+@source "./pages/**/*.{ts,tsx,js,jsx,mdx}";
+@source "./components/**/*.{ts,tsx,js,jsx,mdx}";
+@source "./src/**/*.{ts,tsx,js,jsx,mdx}";
+@source "./public/**/*.html";
+
+/* ===== SAVVY THEME TOKENS (Tailwind v4 @theme) =====
+   These names map directly to utilities like:
+   bg-surface, border-surface-2, text-accent, text-primary, etc.
+*/
 @theme {
-  --color-surface:   #000033;   /* page bg */
-  --color-surface-2: #080826;   /* cards/nav active */
-  --color-surface-3: #000020;   /* navbar/footer darker */
-  --color-text:      #e8eeff;   /* main text */
+  /* Surfaces */
+  --color-surface:   #000033;  /* page bg */
+  --color-surface-2: #080826;  /* cards / nav active / borders */
+  --color-surface-3: #000020;  /* navbar / footer darker */
 
-  --color-brand-400: #4c72ff;   /* light accent */
-  --color-brand-600: #234dd4;   /* primary */
-  --color-brand-700: #1939a3;   /* hover */
+  /* Text */
+  --color-text:      #e8eeff;
+
+  /* Brand palette (match your new theme) */
+  --color-primary:   #02C6F0;  /* cyan */
+  --color-secondary: #0073A4;  /* deep cyan */
+  --color-accent:    #B1B610;  /* yellow for headings */
+  --color-brand:     #a3e635;  /* lime for dots/badges if needed */
 }
 
-:root{ color-scheme: dark; }
-html{ scroll-behavior: smooth; }
-body{ @apply bg-surface text-[--color-text] antialiased; }
+/* Global */
+:root { color-scheme: dark; }
+html  { scroll-behavior: smooth; }
+body  { @apply bg-surface text-[--color-text] antialiased; }
 
-/* headings + text */
-.h1{ font-size:clamp(2rem,2.5vw+1.5rem,3.2rem); font-weight:800; }
-.h2{ font-size:clamp(1.5rem,1.5vw+1rem,2.25rem); font-weight:700; }
+/* Headings use the yellow accent */
+.h1{
+  font-size: clamp(2rem, 2.5vw + 1.5rem, 3.2rem);
+  font-weight: 800;
+  color: var(--color-accent);
+}
+.h2{
+  font-size: clamp(1.5rem, 1.5vw + 1rem, 2.25rem);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+/* Utility for making any heading yellow via class */
+.heading-accent{ color: var(--color-accent); }
+
+/* Paragraph tone */
 .p{ @apply text-[color:rgba(232,238,255,0.8)] text-sm sm:text-base; }
 
-/* focus states */
-:focus-visible{ outline:2px solid var(--color-brand-400); outline-offset:2px; }
-@media (prefers-reduced-motion:reduce){
-  *{ animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; scroll-behavior:auto!important; }
+/* Focus states */
+:focus-visible{
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-/* layout */
-.container{ max-width: 80rem; margin-inline:auto; padding-inline:1rem; }
-@media (min-width:1024px){ .container{ padding-inline:2rem; } }
+/* Layout */
+.container{ max-width: 80rem; margin-inline: auto; padding-inline: 1rem; }
+@media (min-width:1024px){ .container{ padding-inline: 2rem; } }
 
-/* full-bleed hero */
-.bleed{ margin-inline:calc(50% - 50vw); width:100vw; }
+/* Full-bleed hero backdrop */
+.bleed{ margin-inline: calc(50% - 50vw); width: 100vw; }
 .hero-bg{
   background:
-    radial-gradient(60rem 40rem at 100% -10%, rgba(0,0,51,.4), transparent 60%),
-    radial-gradient(60rem 40rem at   0% -10%, rgba(35,77,212,.25), transparent 60%);
+    radial-gradient(60rem 40rem at 100% -10%, rgba(0,0,51,.40), transparent 60%),
+    radial-gradient(60rem 40rem at   0% -10%, rgba(0,115,164,.25), transparent 60%);
 }
 
-/* hide mobile scrollbar */
-.no-scrollbar::-webkit-scrollbar{ display:none; }
-.no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none; }
+/* Hide mobile scrollbar */
+.no-scrollbar::-webkit-scrollbar{ display: none; }
+.no-scrollbar{ -ms-overflow-style: none; scrollbar-width: none; }
 
-/* full-bleed row for small screens */
-.bleed-x{ margin-inline:calc(50% - 50vw); padding-inline:clamp(1rem, 4vw, 2rem); }
+/* Full-bleed row for small screens */
+.bleed-x{
+  margin-inline: calc(50% - 50vw);
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
 
-/* navbar + footer darker than page bg */
+/* Navbar + footer darker than page bg, with subtle borders */
 .navbar,
-footer {
+footer{
   background-color: var(--color-surface-3);
   color: var(--color-text);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-footer {
-  border-top: 1px solid rgba(255,255,255,0.05);
+footer{ border-top: 1px solid rgba(255,255,255,0.05); }
+
+/* ==== Helpers to align with your components =====
+   Cards often use: border-surface-2 bg-surface/45
+   Ensure contrast on translucent surfaces.
+*/
+.card-surface{
+  @apply rounded-2xl border border-surface-2 bg-surface/45;
 }
+
+/* Buttons that match the scheme */
+.btn-primary{
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium
+         bg-primary text-[--color-text] hover:bg-primary/90;
+}
+.btn-secondary{
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium
+         bg-secondary text-[--color-text] hover:bg-secondary/90;
+}
+.btn-outline{
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium
+         border border-surface-2 bg-transparent text-[--color-text] hover:bg-surface/40;
+}
+
+/* Subtle separators using surface-2 */
+.hr-surface{ height:1px; background: color-mix(in oklab, var(--color-surface-2), transparent 30%); }

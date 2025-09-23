@@ -1,13 +1,35 @@
 /** @format */
-
 import type { Metadata } from "next";
 import "./globals.css";
 import Nav from "../components/Nav";
-import Footer from "../components/Footer"; // ✅ import
+import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Savvy Portfolio",
+  title: {
+    default: "Savvy Services",
+    template: "%s | Savvy Services",
+  },
   description: "Savvy Facility Services & Management",
+  applicationName: "Savvy Services",
+  icons: {
+    icon: "/favicon.ico", // main favicon
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  openGraph: {
+    title: "Savvy Services",
+    siteName: "Savvy Services",
+    description: "Savvy Facility Services & Management",
+    images: ["/og.png"], // place your share image in public/
+    locale: "ar_AR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Savvy Services",
+    description: "Savvy Facility Services & Management",
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({
@@ -17,10 +39,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang='ar' dir='rtl'>
-      <body className='bg-surface text-[--color-text]'>
+      <head>
+        {/* Explicit favicon for browsers that ignore metadata */}
+        <link rel='icon' href='/favicon.ico' />
+        <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
+      </head>
+      <body className='bg-surface text-[--color-text] min-h-screen flex flex-col'>
         <Nav />
-        {children}
-        <Footer /> {/* ✅ add footer here */}
+        <main className='flex-1'>{children}</main>
+        <Footer />
       </body>
     </html>
   );

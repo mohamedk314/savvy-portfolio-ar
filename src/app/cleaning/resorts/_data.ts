@@ -17,7 +17,7 @@ export const RESORTS_SECTIONS: ResortsSection[] = [
     key: "beach",
     title: "نظافة الشواطئ والأماكن العامة",
     subtitle: "إدارة وتشغيل ميداني مع فرز أوّلي للمخلفات",
-    img: "/images/heroSlides/images.png", // <— replace with your real image later
+    img: "/images/cleaning/resorts/beach.jpg", // <— replace with your real image later
     intro: [
       "إدارة نظافة الشواطئ والساحات العامة وممرات القرية مع توفير حاويات وفرز أوّلي.",
       "فرق صباحية ومسائية خلال المواسم مع استجابة سريعة للذروة.",
@@ -89,7 +89,7 @@ export const RESORTS_SECTIONS: ResortsSection[] = [
     key: "pools",
     title: "نظافة حمامات السباحة الخاصة والعامة",
     subtitle: "محيط آمن ومنزلقات محمية من الانزلاق",
-    img: "/images/resorts/pools-hero.jpg",
+    img: "/images/cleaning/resorts/pools.jpg",
     intro: [
       "تنظيف محيط حمامات السباحة والفلترات والدُشّات والمناطق الرطبة.",
       "تشغيل متكامل مع فريق الصيانة عند الطلب لضبط المعالجات الكيميائية.",

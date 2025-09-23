@@ -13,12 +13,12 @@ export type CleaningCard = {
 export const CLEANING_CARDS: CleaningCard[] = [
   {
     href: "/cleaning/villas",
-    title: "نظافة الفيلات",
+    title: "نظافة الوحدات السكنية",
     cover: "/images/cleaning/villas.jpg",
   },
   {
     href: "/cleaning/enterprises",
-    title: "الشركات والمولات و المعارض و المؤسسات",
+    title: "  شركات و مولات و مصانع ",
     cover: "/images/cleaning/companies.jpg",
   },
   {

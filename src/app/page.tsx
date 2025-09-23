@@ -3,10 +3,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { slides } from "../data/heroSlides";
 import { REVIEWS } from "./_data_customer_rev";
+
 const SLIDE_MS = 7000;
+
 /* ------- small helpers ------- */
 function Stars({ n }: { n: 1 | 2 | 3 | 4 | 5 }) {
   return (
@@ -49,7 +51,7 @@ function ReviewCard({
           </div>
         </div>
         <Image
-          src={avatar || "/images/reviews/blank-user.png"} // fallback to blank PP
+          src={avatar || "/images/reviews/blank-user.png"}
           alt={name}
           width={44}
           height={44}
@@ -96,6 +98,97 @@ function ReviewCard({
         </div>
       )}
     </article>
+  );
+}
+
+/* ------- reviews carousel (3 at a time, auto every 6s) ------- */
+const PAGE_SIZE = 3;
+const INTERVAL_MS = 4000;
+
+function ReviewsCarousel() {
+  const totalPages = Math.ceil(REVIEWS.length / PAGE_SIZE) || 1;
+  const [page, setPage] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const pageItems = useMemo(() => {
+    const start = page * PAGE_SIZE;
+    return REVIEWS.slice(start, start + PAGE_SIZE);
+  }, [page]);
+
+  const go = useCallback(
+    (to: number) => {
+      setVisible(false);
+      setTimeout(() => {
+        setPage(((to % totalPages) + totalPages) % totalPages);
+        setVisible(true);
+      }, 160);
+    },
+    [totalPages]
+  );
+
+  useEffect(() => {
+    if (totalPages <= 1) return;
+    timerRef.current && clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => go(page + 1), INTERVAL_MS);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+      timerRef.current = null;
+    };
+  }, [page, go, totalPages]);
+
+  return (
+    <section className='space-y-4'>
+      <div
+        className={[
+          "grid gap-4 sm:grid-cols-2 xl:grid-cols-3",
+          "transition-opacity duration-200",
+          visible ? "opacity-100" : "opacity-0",
+        ].join(" ")}
+        onMouseEnter={() => timerRef.current && clearInterval(timerRef.current)}
+        onMouseLeave={() => {
+          if (totalPages > 1)
+            timerRef.current = setInterval(() => go(page + 1), INTERVAL_MS);
+        }}>
+        {pageItems.map((rv) => (
+          <ReviewCard key={rv.id} {...rv} />
+        ))}
+      </div>
+
+      {totalPages > 1 && (
+        <div className='flex items-center justify-between'>
+          <button
+            type='button'
+            onClick={() => go(page - 1)}
+            className='rounded-xl border px-3 py-1.5 text-sm hover:bg-white/5'
+            aria-label='السابق'>
+            ‹ السابق
+          </button>
+
+          <div className='inline-flex items-center gap-1'>
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => go(i)}
+                aria-label={`انتقال إلى صفحة ${i + 1}`}
+                className={[
+                  "h-2.5 w-2.5 rounded-full",
+                  i === page ? "bg-current" : "bg-current/25",
+                ].join(" ")}
+              />
+            ))}
+          </div>
+
+          <button
+            type='button'
+            onClick={() => go(page + 1)}
+            className='rounded-xl border px-3 py-1.5 text-sm hover:bg-white/5'
+            aria-label='التالي'>
+            التالي ›
+          </button>
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -246,17 +339,41 @@ export default function Page() {
 
       {/* INTRO / VALUE PROPS */}
       <section className='container py-10 md:py-12'>
-        <div className='text-right'>
-          <h1 className='h1'> مرحبا بكم في ساڤي </h1>
-          <ul className='list-disc list-inside mt-3 space-y-1'>
+        <div className='text-center'>
+          <h1 className='text-4xl font-extrabold' style={{ color: "#B1B610" }}>
+            مرحبا بكم في ساڤي
+          </h1>
+        </div>
+        <div>
+          <ul className='list-disc list-inside mt-3 space-y-1 text-right inline-block'>
             نقدّم لكم خدمات متكاملة تلبي احتياجاتكم:
             <li>نظافة</li>
             <li>أمن</li>
             <li>صيانة</li>
             <li>تنسيق حدائق</li>
+            <li>مكافحة الحشرات و القوارض</li>
             <li>خدمات أخرى</li>
           </ul>
         </div>
+
+        <section className='container pb-14'>
+          <div className='rounded-3xl border border-surface-2 bg-surface/45 p-4 md:p-6'>
+            <h3 className='text-right text-xl font-semibold text-white mb-3'>
+              {" "}
+              فيديو تعريفي لخدماتنا
+            </h3>
+            <div className='relative aspect-video overflow-hidden rounded-2xl bg-black'>
+              <video
+                className='h-full w-full'
+                controls
+                preload='metadata'
+                poster='/videos/thumbnails/LOGOintro.jpg'>
+                <source src='/videos/intro.mp4' type='video/mp4' />
+                متصفحك لا يدعم تشغيل الفيديو.
+              </video>
+            </div>
+          </div>
+        </section>
 
         <div className='mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4'>
           {[
@@ -276,8 +393,12 @@ export default function Page() {
             <div
               key={b.t}
               className='rounded-2xl border border-surface-2 bg-surface/45 p-4 text-right'>
-              <h3 className='font-semibold text-white'>{b.t}</h3>
-              <p className='p mt-1'>{b.d}</p>
+              <h5
+                className='text-4xl font-extrabold mb-2'
+                style={{ color: "#B1B610" }}>
+                {b.t}
+              </h5>
+              <p className='p mt-1 text-white'>{b.d}</p>
             </div>
           ))}
         </div>
@@ -286,39 +407,34 @@ export default function Page() {
       {/* REVIEWS */}
       <section className='container py-10 md:py-12'>
         <div className='mb-4 text-right'>
-          <h2 className='text-2xl md:text-3xl font-extrabold text-white tracking-tight'>
+          <h1 className='text-4xl font-extrabold' style={{ color: "#B1B610" }}>
             آراء العملاء
-          </h2>
+          </h1>
           <p className='text-white/75 mt-1 text-sm'>
             آراء تم تجميعها من عملائنا .
           </p>
         </div>
 
-        <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
-          {REVIEWS.map((rv) => (
-            <ReviewCard key={rv.id} {...rv} />
-          ))}
-        </div>
+        <ReviewsCarousel />
       </section>
 
       {/* VIDEO (placeholder until you add a file) */}
       <section className='container pb-14'>
         <div className='rounded-3xl border border-surface-2 bg-surface/45 p-4 md:p-6'>
-          <h3 className='text-right text-xl font-semibold text-white mb-3'>
-            فيديو تعريفي
-          </h3>
+          <div className='text-center'>
+            <h1
+              className='text-4xl font-extrabold'
+              style={{ color: "#B1B610" }}>
+              أراء العملاء
+            </h1>
+          </div>
           <div className='relative aspect-video overflow-hidden rounded-2xl bg-black'>
-            {/* TODO: ضع الفيديو هنا:
-                1) ضع الملف في: /public/videos/intro.mp4
-                2) أو غيّر src بالمسار الذي تريده
-            */}
             <video
               className='h-full w-full'
               controls
               preload='metadata'
-              poster='/images/heroSlides/images.png' /* صورة الغلاف */
-            >
-              <source src='/videos/intro.mp4' type='video/mp4' />
+              poster='/videos/thumbnails/CustomerReview.png'>
+              <source src='/videos/customerrev.mp4' type='video/mp4' />
               متصفحك لا يدعم تشغيل الفيديو.
             </video>
           </div>
