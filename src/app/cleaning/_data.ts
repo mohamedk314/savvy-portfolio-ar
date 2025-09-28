@@ -14,8 +14,9 @@ export const CLEANING_CARDS: CleaningCard[] = [
   {
     href: "/cleaning/villas",
     title: "نظافة الوحدات السكنية",
-    cover: "/images/cleaning/villas.jpg",
+    cover: "/images/cleaning/cleaningppp.jpg",
   },
+  /*
   {
     href: "/cleaning/enterprises",
     title: "  شركات و مولات و مصانع ",
@@ -27,6 +28,7 @@ export const CLEANING_CARDS: CleaningCard[] = [
     cover: "/images/cleaning/resorts.jpg",
     note: "غير متاح حالياً",
   },
+  */
   {
     href: "/cleaning/extras",
     title: "خدمات أخرى",

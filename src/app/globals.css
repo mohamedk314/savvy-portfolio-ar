@@ -118,3 +118,5 @@ footer{ border-top: 1px solid rgba(255,255,255,0.05); }
 
 /* Subtle separators using surface-2 */
 .hr-surface{ height:1px; background: color-mix(in oklab, var(--color-surface-2), transparent 30%); }
+
+

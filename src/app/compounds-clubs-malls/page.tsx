@@ -3,7 +3,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { COMPOUND_SECTIONS } from "./_data";
+import { SECTIONS } from "./_data";
 
 /* Small card */
 function Card({
@@ -80,24 +80,23 @@ function Segmented<T extends string>({
 }
 
 /* Page */
-export default function CompoundsPage() {
-  const [tab, setTab] =
-    useState<(typeof COMPOUND_SECTIONS)[number]["key"]>("security");
-  const current = COMPOUND_SECTIONS.find((s) => s.key === tab)!;
+export default function InstitutionsPage() {
+  const [tab, setTab] = useState<(typeof SECTIONS)[number]["key"]>("companies");
+  const current = SECTIONS.find((s) => s.key === tab)!;
 
   return (
     <main className='container py-10 md:py-12 space-y-8'>
       {/* HERO */}
       <header className='relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/90 to-secondary/80 px-6 py-14 md:py-16 text-center shadow-xl'>
         <h1 className='text-3xl md:text-4xl font-extrabold text-accent tracking-tight'>
-          خدمة الكومباوندات والأندية والمولات
+          المؤسسات و الكيانات الكبرى
         </h1>
         <p className='p mt-3'>
           حزمة تشغيل متكاملة: الأمن والحراسة، النظافة، مكافحة الحشرات، وصيانة
           الحدائق — بإدارة موحّدة وتقارير أداء.
         </p>
 
-        {/* Store CTAs (restored) */}
+        {/* Store CTAs */}
         <div className='mt-6 flex flex-wrap gap-3 justify-center'>
           <a
             href='/download/ios'
@@ -126,7 +125,7 @@ export default function CompoundsPage() {
 
       {/* Tabs */}
       <Segmented
-        tabs={COMPOUND_SECTIONS.map((s) => ({ key: s.key, label: s.title }))}
+        tabs={SECTIONS.map((s) => ({ key: s.key, label: s.title }))}
         value={tab}
         onChange={setTab}
       />
@@ -149,42 +148,52 @@ export default function CompoundsPage() {
           {/* text side */}
           <div className='p-6 md:p-8 text-right'>
             <h2 className='text-2xl font-bold text-accent'>{current.title}</h2>
-            <p className='p mt-1'>{current.subtitle}</p>
+            {current.subtitle && <p className='p mt-1'>{current.subtitle}</p>}
 
-            <ul className='mt-4 list-disc pr-5 text-sm md:text-base text-white/85 space-y-1.5'>
-              {current.intro.map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
+            {!!current.intro.length && (
+              <ul className='mt-4 list-disc pr-5 text-sm md:text-base text-white/85 space-y-1.5'>
+                {current.intro.map((b) => (
+                  <li key={b}>{b}</li>
+                ))}
+              </ul>
+            )}
 
-            <div className='mt-6 grid gap-4 md:grid-cols-2'>
-              {current.scope.map((blk) => (
-                <Card key={blk.title} title={blk.title}>
-                  <ul className='list-disc pr-5 text-sm text-white/80 space-y-1.5'>
-                    {blk.items.map((i) => (
-                      <li key={i}>{i}</li>
-                    ))}
-                  </ul>
-                </Card>
-              ))}
-            </div>
+            {!!current.scope.length && (
+              <div className='mt-6 grid gap-4 md:grid-cols-2'>
+                {current.scope.map((blk) => (
+                  <Card key={blk.title} title={blk.title}>
+                    <ul className='list-disc pr-5 text-sm text-white/80 space-y-1.5'>
+                      {blk.items.map((i) => (
+                        <li key={i}>{i}</li>
+                      ))}
+                    </ul>
+                  </Card>
+                ))}
+              </div>
+            )}
 
-            <div className='mt-6 grid gap-4 md:grid-cols-2'>
-              <Card title='التشغيل والجدولة'>
-                <ul className='list-disc pr-5 text-sm text-white/80 space-y-1.5'>
-                  {current.ops.map((i) => (
-                    <li key={i}>{i}</li>
-                  ))}
-                </ul>
-              </Card>
-              <Card title='ملاحظات'>
-                <ul className='list-disc pr-5 text-sm text-white/80 space-y-1.5'>
-                  {current.notes.map((i) => (
-                    <li key={i}>{i}</li>
-                  ))}
-                </ul>
-              </Card>
-            </div>
+            {(current.ops.length > 0 || current.notes.length > 0) && (
+              <div className='mt-6 grid gap-4 md:grid-cols-2'>
+                {current.ops.length > 0 && (
+                  <Card title='التشغيل والجدولة'>
+                    <ul className='list-disc pr-5 text-sm text-white/80 space-y-1.5'>
+                      {current.ops.map((i) => (
+                        <li key={i}>{i}</li>
+                      ))}
+                    </ul>
+                  </Card>
+                )}
+                {current.notes.length > 0 && (
+                  <Card title='ملاحظات'>
+                    <ul className='list-disc pr-5 text-sm text-white/80 space-y-1.5'>
+                      {current.notes.map((i) => (
+                        <li key={i}>{i}</li>
+                      ))}
+                    </ul>
+                  </Card>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </section>

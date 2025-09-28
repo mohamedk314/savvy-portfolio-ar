@@ -4,15 +4,13 @@ import "./globals.css";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 
+
 export const metadata: Metadata = {
-  title: {
-    default: "Savvy Services",
-    template: "%s | Savvy Services",
-  },
+  title: { default: "Savvy Services", template: "%s | Savvy Services" },
   description: "Savvy Facility Services & Management",
   applicationName: "Savvy Services",
   icons: {
-    icon: "/favicon.ico", // main favicon
+    icon: "/favicon.ico",
     shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
@@ -20,7 +18,7 @@ export const metadata: Metadata = {
     title: "Savvy Services",
     siteName: "Savvy Services",
     description: "Savvy Facility Services & Management",
-    images: ["/og.png"], // place your share image in public/
+    images: ["/og.png"],
     locale: "ar_AR",
     type: "website",
   },
@@ -40,7 +38,6 @@ export default function RootLayout({
   return (
     <html lang='ar' dir='rtl'>
       <head>
-        {/* Explicit favicon for browsers that ignore metadata */}
         <link rel='icon' href='/favicon.ico' />
         <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
       </head>

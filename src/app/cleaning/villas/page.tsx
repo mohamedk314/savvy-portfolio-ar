@@ -87,7 +87,7 @@ export default function VillasPage() {
       {/* HERO */}
       <header className='relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/90 to-secondary/80 px-6 py-14 md:py-16 text-center shadow-xl'>
         <h1 className='text-3xl md:text-4xl font-extrabold text-accent tracking-tight'>
-          نظافة الفيلات و الشقق
+          الوحدات السكنية{" "}
         </h1>
         <p className='p mt-3'>اختر نوع الخدمة لعرض التفاصيل والصور</p>
       </header>

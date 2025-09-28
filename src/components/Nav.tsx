@@ -1,10 +1,10 @@
 /** @format */
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react"; // hamburger + close
+import { Menu, X } from "lucide-react";
 import { pageLinks } from "../data/pages";
 import Logo from "./Logo";
 
@@ -12,71 +12,141 @@ function cn(...a: (string | false | undefined)[]) {
   return a.filter(Boolean).join(" ");
 }
 
+/* تطبيع المسار لإزالة الشرطات الختامية */
+const normalize = (p: string) => (p === "/" ? "/" : p.replace(/\/+$/, ""));
+
+/* Active matcher: exact for '/', prefix for others. */
+function useIsActive(pathname: string) {
+  const norm = useMemo(() => normalize(pathname || "/"), [pathname]);
+  return (href: string) => {
+    const h = normalize(href || "/");
+    if (h === "/") return norm === "/";
+    return norm === h || norm.startsWith(h + "/");
+  };
+}
+
+function SocialIcons() {
+  return (
+    <div className='flex items-center gap-3 md:gap-4 mx-2 md:mx-4'>
+      <a
+        href='https://m.me/yourpage'
+        aria-label='Messenger'
+        target='_blank'
+        rel='noopener noreferrer'
+        className='inline-flex h-6 w-6 items-center justify-center rounded-full ring-1 ring-white/15 hover:ring-white/30 transition'>
+        <img src='/icons/messenger.svg' alt='' className='h-4 w-4' />
+      </a>
+      <a
+        href='https://www.instagram.com/yourpage'
+        aria-label='Instagram'
+        target='_blank'
+        rel='noopener noreferrer'
+        className='inline-flex h-6 w-6 items-center justify-center rounded-full ring-1 ring-white/15 hover:ring-white/30 transition'>
+        <img src='/icons/instagram.svg' alt='' className='h-4 w-4' />
+      </a>
+      <a
+        href='https://www.tiktok.com/@yourpage'
+        aria-label='TikTok'
+        target='_blank'
+        rel='noopener noreferrer'
+        className='inline-flex h-6 w-6 items-center justify-center rounded-full ring-1 ring-white/15 hover:ring-white/30 transition'>
+        <img src='/icons/tiktok.svg' alt='' className='h-4 w-4' />
+      </a>
+    </div>
+  );
+}
+
 export default function Nav() {
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
+  const pathname = usePathname() || "/";
+  const isActive = useIsActive(pathname);
 
   return (
-    <header className='sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-[color:rgb(15_20_32_/_0.7)]'>
+    <header className='sticky top-0 z-50 border-b border-white/10 backdrop-blur supports-[backdrop-filter]:bg-[color:rgb(0_0_20_/_0.6)]'>
       <div className='container'>
         <div className='flex items-center justify-between py-3'>
-          {/* Bigger logo */}
-          <Link
-            href='/'
-            aria-label='الصفحة الرئيسية'
-            className='flex items-center'>
-            <div className='scale-110 md:scale-125'>
-              <Logo />
-            </div>
-          </Link>
+          {/* Logo + socials */}
+          <div className='flex items-center'>
+            <Link
+              href='/'
+              aria-label='الصفحة الرئيسية'
+              className='flex items-center'>
+              <div className='scale-110 md:scale-125'>
+                <Logo />
+              </div>
+            </Link>
+            <SocialIcons />
+          </div>
 
-          {/* desktop nav */}
-          <nav className='hidden gap-2 md:flex' aria-label='التنقل'>
-            {pageLinks.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={cn(
-                  "rounded-lg px-3 py-2 text-sm transition-colors",
-                  pathname === l.href
-                    ? "bg-surface-2 text-white"
-                    : "text-white/70 hover:text-white"
-                )}>
-                {l.label}
-              </Link>
-            ))}
+          {/* Desktop nav */}
+          <nav
+            className='hidden md:flex items-center gap-1'
+            aria-label='التنقل'>
+            {pageLinks.map((l) => {
+              const href = normalize(l.href);
+              const label = (l.label || "").trim();
+              const active = isActive(href);
+              return (
+                <Link
+                  key={href}
+                  href={href || "/"}
+                  prefetch={false}
+                  className={cn(
+                    "relative rounded-lg px-3 py-2 text-sm transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/60",
+                    active
+                      ? "text-accent bg-white/5 border border-white/10"
+                      : "text-[--color-text]/80 hover:text-[--color-text] hover:bg-white/5"
+                  )}>
+                  {label}
+                  {active && (
+                    <span
+                      aria-hidden
+                      className='pointer-events-none absolute inset-x-2 -bottom-[3px] h-[2px] rounded-full bg-accent'
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* mobile toggle (hamburger) */}
+          {/* Mobile toggle */}
           <button
             type='button'
-            className='md:hidden rounded-lg border border-surface-2 p-2 text-white/90'
+            className='md:hidden rounded-lg border border-white/10 p-2 text-[--color-text]/90 outline-none focus-visible:ring-2 focus-visible:ring-primary/60'
             aria-expanded={open}
             aria-controls='mobile-menu'
             aria-label={open ? "إغلاق القائمة" : "فتح القائمة"}
             onClick={() => setOpen((v) => !v)}>
-            {open ? <X size={28} /> : <Menu size={28} />}
+            {open ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* mobile menu */}
+        {/* Mobile menu */}
         {open && (
           <div id='mobile-menu' className='md:hidden pb-4'>
-            <div className='grid gap-2'>
-              {pageLinks.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className={cn(
-                    "rounded-lg px-4 py-3 text-sm text-right border transition-colors",
-                    pathname === l.href
-                      ? "bg-surface-2 border-surface-2 text-white"
-                      : "border-surface-2 text-white/80 hover:text-white"
-                  )}
-                  onClick={() => setOpen(false)}>
-                  {l.label}
-                </Link>
-              ))}
+            <div className='rounded-2xl border border-white/10 bg-white/5 p-2'>
+              <div className='grid gap-2'>
+                {pageLinks.map((l) => {
+                  const href = normalize(l.href);
+                  const label = (l.label || "").trim();
+                  const active = isActive(href);
+                  return (
+                    <Link
+                      key={href}
+                      href={href || "/"}
+                      prefetch={false}
+                      className={cn(
+                        "rounded-lg px-4 py-3 text-sm text-right outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary/60",
+                        active
+                          ? "bg-white/5 text-accent border border-white/10"
+                          : "text-[--color-text]/80 hover:text-[--color-text] hover:bg-white/5 border border-transparent"
+                      )}
+                      onClick={() => setOpen(false)}>
+                      {label}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
         )}

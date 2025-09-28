@@ -129,6 +129,7 @@ function ReviewsCarousel() {
 
   useEffect(() => {
     if (totalPages <= 1) return;
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     timerRef.current && clearInterval(timerRef.current);
     timerRef.current = setInterval(() => go(page + 1), INTERVAL_MS);
     return () => {

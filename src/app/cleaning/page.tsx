@@ -44,7 +44,7 @@ function CardItem({
             {title}
           </h3>
           <p className='mt-0.5 flex items-center justify-end gap-1 text-right text-[11px] sm:text-xs text-[--color-text]/85 group-hover:text-primary'>
-            أنقر للمزيد{" "}
+            أضغط للمزيد{" "}
             <span aria-hidden className='text-sm'>
               →
             </span>
@@ -65,12 +65,7 @@ export default function CleaningHome() {
         </h1>
         <p className='p mt-3'>أختر خدمة النظافه المناسبه إليك.</p>
         <div className='mx-auto mt-5 flex flex-wrap justify-center gap-2'>
-          {[
-            "وحدات سكنية",
-            " شركات و مولات و مصانع",
-            "قرى سياحية",
-            "خدمات أخرى",
-          ].map((t) => (
+          {["وحدات سكنية", "خدمات أخرى"].map((t) => (
             <span
               key={t}
               className='rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs text-primary'>
@@ -82,17 +77,42 @@ export default function CleaningHome() {
 
       {/* GRID */}
       <section
-        className='grid gap-5 sm:grid-cols-2 xl:grid-cols-4'
-        aria-label='فئات خدمات النظافة'>
+        aria-label='فئات خدمات النظافة'
+        className='mx-auto max-w-4xl grid gap-5 sm:grid-cols-2 justify-items-center'>
         {CLEANING_CARDS.map((c, i) => (
-          <CardItem
+          <Link
             key={c.href}
             href={c.href}
-            title={c.title}
-            cover={c.cover}
-            note={c.note}
-            priority={i === 0}
-          />
+            aria-label={c.title}
+            className='w-full max-w-md group overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-sm transition hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60'>
+            <div className='relative aspect-[3/4]'>
+              <Image
+                src={c.cover}
+                alt={c.title}
+                fill
+                sizes='(min-width:768px) 400px, 100vw'
+                priority={i === 0}
+                className='object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]'
+              />
+              <div className='absolute inset-0 z-10 bg-gradient-to-t from-[rgba(0,0,0,0.58)] via-[rgba(0,0,0,0.28)] to-transparent' />
+              {c.note && (
+                <span className='absolute right-2 top-2 z-20 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold text-black/90'>
+                  {c.note}
+                </span>
+              )}
+              <div className='absolute inset-x-0 bottom-0 z-20 p-3 sm:p-4'>
+                <h3 className='text-right text-base sm:text-lg font-semibold text-accent drop-shadow'>
+                  {c.title}
+                </h3>
+                <p className='mt-0.5 flex items-center justify-end gap-1 text-right text-[11px] sm:text-xs text-[--color-text]/85 group-hover:text-primary'>
+                  أضغط للمزيد{" "}
+                  <span aria-hidden className='text-sm'>
+                    →
+                  </span>
+                </p>
+              </div>
+            </div>
+          </Link>
         ))}
       </section>
     </main>

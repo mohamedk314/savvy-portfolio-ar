@@ -35,7 +35,7 @@ function Card({
             {title}
           </h3>
           <p className='mt-0.5 flex items-center justify-end gap-1 text-right text-[11px] sm:text-xs text-[--color-text]/85 group-hover:text-primary'>
-            أنقر للمزيد{" "}
+            أضغط للمزيد{" "}
             <span aria-hidden className='text-sm'>
               →
             </span>
