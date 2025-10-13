@@ -21,8 +21,9 @@ export const CLEANING_CARDS: CleaningCard[] = [
     href: "/cleaning/extras",
     title: "خدمات أخرى",
     covers: [
-      "/images/testsize/grid_1200x1600_portrait.png",
-      "/images/testsize/grid_1200x1600_portrait.png",
+      "/images/cleaning/extras/Extra1.jpg",
+      "/images/cleaning/extras/Extra2.jpg",
+      "/images/cleaning/extras/Extra3.jpg",
     ],
   },
   /*
