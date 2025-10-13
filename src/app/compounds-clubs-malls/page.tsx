@@ -133,8 +133,7 @@ export default function InstitutionsPage() {
       {/* Content */}
       <section className='rounded-3xl border border-white/10 bg-white/5 overflow-hidden'>
         <div className='grid md:grid-cols-2'>
-          {/* hero image */}
-          <div className='relative aspect-[16/10] md:aspect-auto md:min-h-[420px]'>
+          <div className='relative aspect-[16/10] md:aspect-[16/10] overflow-hidden rounded-3xl'>
             <Image
               src={current.img}
               alt={current.title}

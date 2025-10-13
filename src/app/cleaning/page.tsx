@@ -3,55 +3,57 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { CLEANING_CARDS } from "./_data";
 
-function CardItem({
-  href,
-  title,
-  cover,
-  note,
+/* Auto-rotating, cross-fade slider for a single card */
+function CardSlider({
+  images,
+  alt,
   priority,
 }: {
-  href: string;
-  title: string;
-  cover: string;
-  note?: string;
+  images: string[];
+  alt: string;
   priority?: boolean;
 }) {
+  const [idx, setIdx] = useState(0);
+  const count = images.length;
+  const timer = useRef<NodeJS.Timeout | null>(null);
+
+  const safeImages = useMemo(
+    () => (count ? images : ["/images/fallback.jpg"]),
+    [images, count]
+  );
+
+  useEffect(() => {
+    if (safeImages.length < 2) return;
+    timer.current = setInterval(
+      () => setIdx((i) => (i + 1) % safeImages.length),
+      4000
+    );
+    return () => {
+      if (timer.current) clearInterval(timer.current);
+    };
+  }, [safeImages.length]);
+
   return (
-    <Link
-      href={href}
-      aria-label={title}
-      className='group block overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-sm transition hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60'>
-      {/* 3:4 image */}
-      <div className='relative aspect-[3/4]'>
+    <div className='relative aspect-[3/4]'>
+      {safeImages.map((src, i) => (
         <Image
-          src={cover}
-          alt={title}
+          key={src}
+          src={src}
+          alt={alt}
           fill
           sizes='(min-width:1280px) 25vw, (min-width:768px) 33vw, 100vw'
-          priority={priority}
-          className='object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]'
+          priority={priority && i === 0}
+          className={
+            "absolute inset-0 object-cover object-center transition-opacity duration-700 " +
+            (i === idx ? "opacity-100" : "opacity-0")
+          }
         />
-        <div className='absolute inset-0 z-10 bg-gradient-to-t from-[rgba(0,0,0,0.58)] via-[rgba(0,0,0,0.28)] to-transparent' />
-        {note && (
-          <span className='absolute right-2 top-2 z-20 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold text-black/90'>
-            {note}
-          </span>
-        )}
-        <div className='absolute inset-x-0 bottom-0 z-20 p-3 sm:p-4'>
-          <h3 className='text-right text-base sm:text-lg font-semibold text-accent drop-shadow'>
-            {title}
-          </h3>
-          <p className='mt-0.5 flex items-center justify-end gap-1 text-right text-[11px] sm:text-xs text-[--color-text]/85 group-hover:text-primary'>
-            أضغط للمزيد{" "}
-            <span aria-hidden className='text-sm'>
-              →
-            </span>
-          </p>
-        </div>
-      </div>
-    </Link>
+      ))}
+      <div className='absolute inset-0 z-10 bg-gradient-to-t from-[rgba(0,0,0,0.58)] via-[rgba(0,0,0,0.28)] to-transparent' />
+    </div>
   );
 }
 
@@ -85,16 +87,8 @@ export default function CleaningHome() {
             href={c.href}
             aria-label={c.title}
             className='w-full max-w-md group overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-sm transition hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60'>
-            <div className='relative aspect-[3/4]'>
-              <Image
-                src={c.cover}
-                alt={c.title}
-                fill
-                sizes='(min-width:768px) 400px, 100vw'
-                priority={i === 0}
-                className='object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]'
-              />
-              <div className='absolute inset-0 z-10 bg-gradient-to-t from-[rgba(0,0,0,0.58)] via-[rgba(0,0,0,0.28)] to-transparent' />
+            <div className='relative'>
+              <CardSlider images={c.covers} alt={c.title} priority={i === 0} />
               {c.note && (
                 <span className='absolute right-2 top-2 z-20 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold text-black/90'>
                   {c.note}

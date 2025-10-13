@@ -3,144 +3,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { pestcontrolImages as PC } from "@/app/pest-control/pestControlImages";
-
-type TKey = "overview" | "methods" | "services" | "prep" | "faq";
-
-const SECTIONS: Record<
-  TKey,
-  {
-    title: string;
-    subtitle: string;
-    cover: string;
-    gallery: readonly string[];
-    bullets: string[];
-    blocks: { title: string; items: string[] }[];
-  }
-> = {
-  overview: {
-    title: "نظرة عامة",
-    subtitle: "مكافحة شاملة آمنة للأسرة والبيئة",
-    cover: PC.sections.overview.cover,
-    gallery: PC.sections.overview.gallery,
-    bullets: [
-      "فحص مبدئي لتحديد نوع الآفة ومساراتها.",
-      "خطة علاج متعددة المراحل حسب شدة الإصابة.",
-      "مواد معتمدة وجرعات مضبوطة حسب معايير السلامة.",
-    ],
-    blocks: [
-      {
-        title: "آفات شائعة",
-        items: ["صراصير", "نمل", "بقّ الفراش", "قوارض", "ذباب/بعوض"],
-      },
-      {
-        title: "لماذا سافي؟",
-        items: ["فنيون معتمدون", "مواد أصلية", "متابعة ما بعد المعالجة"],
-      },
-    ],
-  },
-  methods: {
-    title: "طرق المكافحة",
-    subtitle: "استهداف دقيق وتقنيات آمنة",
-    cover: PC.sections.methods.cover,
-    gallery: PC.sections.methods.gallery,
-    bullets: [
-      "رشّ موضعي داخل/خارج.",
-      "طعم جِلّ للصراصير والنمل.",
-      "مصائد لاصقة ورصد دوري.",
-      "تعفير في المواقع المغلقة عند الحاجة.",
-    ],
-    blocks: [
-      {
-        title: "معدات ومواد",
-        items: [
-          "رشاشات ضغط منخفض ومتوسط.",
-          "جلّات طُعوم عالية الفاعلية.",
-          "ضباب بارد للمناطق الكبيرة عند الطلب.",
-        ],
-      },
-      {
-        title: "اشتراطات السلامة",
-        items: [
-          "تهوية كافية",
-          "إبعاد الأطفال والحيوانات مؤقتاً",
-          "عودة آمنة بعد المدة المحددة",
-        ],
-      },
-    ],
-  },
-  services: {
-    title: "أنواع الخدمات",
-    subtitle: "زيارة واحدة أو برنامج دوري",
-    cover: PC.sections.services.cover,
-    gallery: PC.sections.services.gallery,
-    bullets: [
-      "زيارة علاجية لمرة واحدة للحالات البسيطة.",
-      "برنامج شهري/ربع سنوي للوقاية.",
-      "تغطية منشآت سكنية وتجارية.",
-    ],
-    blocks: [
-      {
-        title: "يشمل",
-        items: [
-          "فحص نقاط الدخول",
-          "معالجة المطابخ والحمامات",
-          "حواشي الأبواب والفتحات",
-        ],
-      },
-      {
-        title: "تقارير",
-        items: ["تقرير قبل/بعد عند الطلب", "توصيات وقائية مكتوبة"],
-      },
-    ],
-  },
-  prep: {
-    title: "التحضير والبرنامج",
-    subtitle: "خطوات بسيطة لنتيجة أفضل",
-    cover: PC.sections.prep.cover,
-    gallery: PC.sections.prep.gallery,
-    bullets: [
-      "إغلاق الأطعمة والأدوات المكشوفة قبل الزيارة.",
-      "إبعاد الأطفال والحيوانات الأليفة خلال المعالجة.",
-      "اتباع إرشادات العودة والتهوية.",
-    ],
-    blocks: [
-      {
-        title: "بعد الزيارة",
-        items: [
-          "عدم مسح المناطق المعالجة فوراً",
-          "مراقبة الحركة 48 ساعة",
-          "إبلاغنا في حال ملاحظة نشطة",
-        ],
-      },
-      {
-        title: "برنامج المتابعة",
-        items: ["زيارة إعادة إن لزم", "وقاية دورية لمنع عودة الإصابة"],
-      },
-    ],
-  },
-  faq: {
-    title: "أسئلة شائعة",
-    subtitle: "إجابات مختصرة وواضحة",
-    cover: PC.sections.faq.cover,
-    gallery: PC.sections.faq.gallery,
-    bullets: [
-      "هل الروائح مزعجة؟ عادة خفيفة وتزول مع التهوية.",
-      "متى نعود للمنزل؟ غالباً بعد 2–4 ساعات حسب التعليمات.",
-      "هل المواد آمنة؟ نعم عند الالتزام بالجرعات والإرشادات.",
-    ],
-    blocks: [
-      {
-        title: "نصائح",
-        items: ["سد الشقوق", "تنظيف بقايا الطعام", "إدارة القمامة بإحكام"],
-      },
-      {
-        title: "الدعم",
-        items: ["دعم عبر التطبيق", "تذكير مواعيد المتابعة", "سجل المعالجات"],
-      },
-    ],
-  },
-};
+import { PEST_DATA, TKey } from "./_data";
 
 function BadgeLinks() {
   return (
@@ -239,39 +102,25 @@ function Card({
 
 export default function PestControlPage() {
   const [tab, setTab] = useState<TKey>("overview");
-  const current = SECTIONS[tab];
+  const current = PEST_DATA.sections[tab];
 
   return (
     <main className='container py-10 md:py-12 space-y-8'>
-      {/* HERO */}
       <header className='relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/90 to-secondary/80 px-6 py-14 md:py-16 text-center shadow-xl'>
         <h1 className='text-3xl md:text-4xl font-extrabold text-accent tracking-tight'>
-          خدمة مكافحة الحشرات
+          {PEST_DATA.hero.title}
         </h1>
-        <p className='p mt-3'>حلول آمنة وفعالة مع متابعة ذكية عبر التطبيق</p>
+        <p className='p mt-3'>{PEST_DATA.hero.tagline}</p>
         <div className='mt-6'>
           <BadgeLinks />
         </div>
       </header>
 
-      {/* Tabs */}
-      <Segmented
-        tabs={[
-          { key: "overview", label: "نظرة عامة" },
-          { key: "methods", label: "طرق المكافحة" },
-          { key: "services", label: "أنواع الخدمات" },
-          { key: "prep", label: "التحضير والبرنامج" },
-          { key: "faq", label: "أسئلة شائعة" },
-        ]}
-        value={tab}
-        onChange={setTab}
-      />
+      <Segmented tabs={[...PEST_DATA.tabs]} value={tab} onChange={setTab} />
 
-      {/* Section block */}
       <section className='rounded-3xl border border-white/10 bg-white/5 overflow-hidden'>
         <div className='grid md:grid-cols-2'>
-          {/* image */}
-          <div className='relative aspect-[16/10] md:aspect-auto md:min-h-[420px]'>
+          <div className='relative aspect-[16/10] md:aspect-[16/10] overflow-hidden rounded-3xl'>
             <Image
               src={current.cover}
               alt={current.title}
@@ -282,7 +131,6 @@ export default function PestControlPage() {
             />
           </div>
 
-          {/* copy */}
           <div className='p-6 md:p-8 text-right'>
             <h2 className='text-2xl font-bold text-accent'>{current.title}</h2>
             <p className='p mt-1'>{current.subtitle}</p>
@@ -308,20 +156,22 @@ export default function PestControlPage() {
         </div>
       </section>
 
-      {/* Gallery */}
       <section className='space-y-3'>
         <h3 className='text-xl font-bold text-right text-accent'>معرض الصور</h3>
         <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3'>
           {current.gallery.map((src) => (
             <div
               key={src}
-              className='relative aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-white/5'>
+              className='overflow-hidden rounded-xl border border-white/10 bg-white/5'>
               <Image
                 src={src}
                 alt={current.title}
-                fill
                 sizes='(min-width:1024px) 33vw, 50vw'
-                className='object-cover'
+                width={0}
+                height={0}
+                style={{ width: "100%", height: "auto" }} // auto height = flexible ratio
+                className='block'
+                priority={false}
               />
             </div>
           ))}

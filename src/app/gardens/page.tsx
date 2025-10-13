@@ -169,17 +169,19 @@ export default function GardensPage() {
             </div>
 
             {/* small gallery */}
-            <div className='mt-6 grid grid-cols-3 gap-2'>
+            <div className='mt-6 grid gap-2 sm:grid-cols-2 md:grid-cols-3'>
               {section.gallery.map((src) => (
                 <div
                   key={src}
-                  className='relative aspect-[4/3] overflow-hidden rounded-lg border border-white/10 bg-white/5'>
+                  className='overflow-hidden rounded-lg border border-white/10 bg-white/5'>
                   <Image
                     src={src}
                     alt=''
-                    fill
-                    sizes='33vw'
-                    className='object-cover'
+                    sizes='(min-width:1024px) 33vw, 50vw'
+                    width={0}
+                    height={0}
+                    className='block w-full h-auto'
+                    style={{ width: "100%", height: "auto" }}
                   />
                 </div>
               ))}
@@ -188,5 +190,5 @@ export default function GardensPage() {
         </div>
       </section>
     </main>
-  );
+  ); 
 }

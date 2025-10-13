@@ -105,14 +105,13 @@ export default function VillasPage() {
       {/* SECTION CONTENT */}
       <section className='rounded-3xl border border-white/10 bg-white/5 overflow-hidden'>
         <div className='grid md:grid-cols-2'>
-          {/* hero image */}
-          <div className='relative w-full overflow-hidden rounded-3xl [padding-bottom:125%] md:[padding-bottom:56.25%]'>
+          <div className='relative aspect-[9/16] md:aspect-[9/16] overflow-hidden rounded-3xl'>
             <Image
               src={current.img}
               alt={current.title}
               fill
               sizes='(min-width:1024px) 60vw, 100vw'
-              className='object-contain md:object-cover md:object-center'
+              className='object-cover object-center'
               priority
             />
           </div>

@@ -20,7 +20,7 @@ export const VILLAS_SECTIONS: VillasSection[] = [
     key: "post",
     title: "نظافة ما بعد التشطيب",
     subtitle: "تجهيز المكان للتسليم والسكن",
-    img: "/images/cleaning/villas/aftertashteeb/AT1.jpg",
+    img: "/images/testsize/portrait_1080x1920_9x16.png",
     intro: [
       "خدمة تنظيف مخصصة بعد انتهاء عمليات البناء أو التجديد لإزالة بقايا مواد البناء والأتربة.",
       "تنظيف جميع الأسطح وإزالة الملطّفات وتجهيز المكان للسكن أو الاستخدام.",
@@ -107,7 +107,7 @@ export const VILLAS_SECTIONS: VillasSection[] = [
     key: "routine",
     title: "النظافة المعتادة",
     subtitle: "برنامج دوري يومي/أسبوعي",
-    img: "/images/cleaning/villas/normalcleaning/RT1.jpg",
+    img: "/images/testsize/portrait_1080x1920_9x16.png",
     intro: [
       "خدمة تشمل تنظيف وترتيب وتلميع وإزالة الأتربة للأسطح والإرضيات وتنظيف وتلميع الأثاث للحفاظ على المكان مرتب ونظيف بشكل مستمر.",
     ],
@@ -188,7 +188,7 @@ export const VILLAS_SECTIONS: VillasSection[] = [
     key: "deep",
     title: "النظافة العميقة",
     subtitle: "تنظيف مكثف لجميع الأركان",
-    img: "/images/cleaning/villas/deepcleaning/DC1.jpg",
+    img: "/images/cleaning/villas/deepcleaning/DEEP1.jpg",
     intro: [
       "تنظيف وتلميع وتعقيم شامل ومكثف لجميع أركان المكان بما فيها الأماكن المخفية والمرتفعة.",
       "مناسب قبل المناسبات الكبرى أو عند تدهور الحالة، لضمان بيئة صحية ونظيفة.",

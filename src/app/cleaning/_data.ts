@@ -1,20 +1,29 @@
 /** @format */
 
-// Centralized, easy-to-edit data for the Cleaning landing cards.
-// Replace cover images anytime without touching the page component.
-
 export type CleaningCard = {
   href: string;
   title: string;
-  cover: string; // single image per card (landing)
-  note?: string; // optional badge (e.g., "غير متاح حالياً")
+  covers: string[]; // multiple images per card
+  note?: string;
 };
 
 export const CLEANING_CARDS: CleaningCard[] = [
   {
     href: "/cleaning/villas",
     title: "نظافة الوحدات السكنية",
-    cover: "/images/cleaning/cleaningppp.jpg",
+    covers: [
+      "/images/cleaning/villas/Villas1.png",
+      "/images/cleaning/villas/Villas2.jpg",
+      "/images/cleaning/villas/Villas3.jpg",
+    ],
+  },
+  {
+    href: "/cleaning/extras",
+    title: "خدمات أخرى",
+    covers: [
+      "/images/testsize/grid_1200x1600_portrait.png",
+      "/images/testsize/grid_1200x1600_portrait.png",
+    ],
   },
   /*
   {
@@ -24,14 +33,9 @@ export const CLEANING_CARDS: CleaningCard[] = [
   },
   {
     href: "/cleaning/resorts",
-    title: "نظافة القرى السياحية",
+    title: "نظافة القرى السياحية", 
     cover: "/images/cleaning/resorts.jpg",
     note: "غير متاح حالياً",
   },
   */
-  {
-    href: "/cleaning/extras",
-    title: "خدمات أخرى",
-    cover: "/images/cleaning/other.jpg",
-  },
 ];

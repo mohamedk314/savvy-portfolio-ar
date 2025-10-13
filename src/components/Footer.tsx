@@ -1,6 +1,12 @@
 /** @format */
+"use client";
+import { useState } from "react";
+import TermsModal from "@/components/TermsModal";
+import TermsContent from "@/components/TermsContent";
 
 export default function Footer() {
+  const [openTerms, setOpenTerms] = useState(false);
+
   return (
     <footer className='mt-12 border-t border-white/10 bg-[var(--color-surface-3)] text-[--color-text]'>
       <div className='container py-8 text-right'>
@@ -51,14 +57,17 @@ export default function Footer() {
         <p className='mt-8 text-center text-xs text-white/50'>
           © {new Date().getFullYear()} سافي لخدمات المرافق والإدارة. جميع الحقوق
           محفوظة.{" "}
-          <a
-            href='/attachments/terms/terms.pdf'
-            target='_blank'
-            rel='noopener noreferrer'
+          <button
+            type='button'
+            onClick={() => setOpenTerms(true)}
             className='underline hover:text-accent'>
             الشروط والأحكام
-          </a>
+          </button>
         </p>
+
+        <TermsModal open={openTerms} onClose={() => setOpenTerms(false)}>
+          <TermsContent />
+        </TermsModal>
       </div>
     </footer>
   );
