@@ -15,7 +15,7 @@ export const EXTRAS: Extra[] = [
   {
     slug: "upholstery",
     title: "خدمة المفروشات",
-    thumb: "/images/testsize/card_1200x900_4x3.png",
+    thumb: "/images/cleaning/extras/mafroshat.jpg",
     cover: "/images/cleaning/extras/DEEP1.jpg",
     desc: "تقدِّم سافي خدمة متخصّصة لغسيل المفروشات باستخدام أجهزة معتمدة مثل ماكينات التنظيف بالبخار وأنظمة الرغوة الجافة، لضمان تنظيف عميق وآمن يحافظ على جودة الأقمشة وألوانها.",
     includes: [
@@ -30,8 +30,8 @@ export const EXTRAS: Extra[] = [
   {
     slug: "curtains",
     title: "خدمة غسيل الستائر",
-    thumb: "/images/testsize/card_1200x900_4x3.png",
-    cover: "/images/testsize/grid_1200x1600_3x4.png",
+    thumb: "/images/cleaning/extras/stayr2.jpg",
+    cover: "/images/cleaning/extras/stayr.jpg",
     desc: "خدمة غسيل الستائر بمختلف أنواعها، الخفيفة والثقيلة، وذلك باستخدام أجهزة متخصصة تتيح تنفيذ الخدمة دون الحاجة إلى الفك أو إعادة التركيب.",
     includes: [
       "إجراء فحص مبدئي لتحديد طبيعة الأقمشة واختيار التقنية ومواد النظافة المناسبة.",
@@ -45,7 +45,7 @@ export const EXTRAS: Extra[] = [
   {
     slug: "carpets",
     title: "خدمة غسيل السجاد",
-    thumb: "/images/testsize/card_1200x900_4x3.png",
+    thumb: "/images/cleaning/extras/segad2.jpg",
     cover: "/images/cleaning/extras/segad.jpg",
     desc: "نوفر حلول متقدمة لغسيل جميع أنواع السجاد، سواء كان سجاد عادي، صوف، حرير أو عجمي، مع اعتماد أساليب تنظيف مخصصة لكل نوع للحفاظ على جودته وقيمته.",
     includes: [
@@ -61,7 +61,7 @@ export const EXTRAS: Extra[] = [
   {
     slug: "stains",
     title: "خدمة إزالة البقع العنيدة",
-    thumb: "/images/testsize/card_1200x900_4x3.png",
+    thumb: "/images/cleaning/extras/3aneda2.jpg",
     cover: "/images/cleaning/extras/3aneda.jpg",
     desc: "خدمة متخصصة لإزالة أصعب أنواع البقع من المفروشات، الأثاث، الستائر، والسجاد، باستخدام مواد آمنة على صحة الإنسان والحيوان وتضمن الحفاظ على خامات الأقمشة والنسج والألوان.",
     includes: [
@@ -76,7 +76,7 @@ export const EXTRAS: Extra[] = [
   {
     slug: "organize-room",
     title: "إعادة تنظيم الغرف",
-    thumb: "/images/testsize/card_1200x900_4x3.png",
+    thumb: "/images/cleaning/extras/8oraf.jpg",
     cover: "/images/cleaning/extras/reordering.jpg",
     desc: "خدمة احترافية لإعادة تنظيم الغرف وترتيبها بما يضمن الاستخدام الأمثل للمساحات.",
     includes: [
@@ -91,7 +91,7 @@ export const EXTRAS: Extra[] = [
   {
     slug: "closet",
     title: "خدمة تنظيم الخزائن والدواليب باحترافية",
-    thumb: "/images/testsize/card_1200x900_4x3.png",
+    thumb: "/images/cleaning/extras/tanzeem.jpg",
     cover: "/images/cleaning/extras/5zanat.jpg",
     desc: "تقدّم سافي خدمة متخصصة لتنظيم الدواليب والخزائن الداخلية بما يضمن سهولة الوصول، الاستخدام الأمثل للمساحة، والمظهر المرتب دائمًا.",
     includes: [

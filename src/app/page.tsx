@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { slides } from "../data/heroSlides";
-import { REVIEWS } from "./_data_customer_rev";
+import { REVIEWS, SHOWCASE } from "./_data_customer_rev";
 
 const SLIDE_MS = 7000;
 
@@ -196,6 +196,9 @@ function ReviewsCarousel() {
 export default function Page() {
   const [idx, setIdx] = useState(0);
   const len = slides.length;
+
+  const [scIdx, setScIdx] = useState(0);
+  const sc = SHOWCASE[scIdx] ?? SHOWCASE[0];
 
   // autoplay
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -438,6 +441,65 @@ export default function Page() {
               <source src='/videos/customerrev.mp4' type='video/mp4' />
               متصفحك لا يدعم تشغيل الفيديو.
             </video>
+          </div>
+        </div>
+      </section>
+
+      {/* SHOWCASE */}
+      <section className='container pb-14'>
+        <div className='rounded-3xl border border-surface-2 bg-surface/45 p-4 md:p-6'>
+          <h3 className='text-right text-xl font-semibold text-white mb-3'>
+            سابقة أعمالنا
+          </h3>
+
+          {/* صورة بعرض الفيديو */}
+          <div className='relative aspect-video overflow-hidden rounded-2xl'>
+            <Image
+              src={sc.image}
+              alt={sc.title}
+              fill
+              sizes='100vw'
+              className='object-cover'
+              priority
+            />
+
+            {/* arrows */}
+            <button
+              type='button'
+              aria-label='السابق'
+              onClick={() =>
+                setScIdx((i) => (i - 1 + SHOWCASE.length) % SHOWCASE.length)
+              }
+              className='absolute right-2 top-1/2 -translate-y-1/2 z-10 grid h-9 w-9 place-items-center rounded-full bg-black/40 text-white text-lg hover:bg-black/55'>
+              ‹
+            </button>
+            <button
+              type='button'
+              aria-label='التالي'
+              onClick={() => setScIdx((i) => (i + 1) % SHOWCASE.length)}
+              className='absolute left-2 top-1/2 -translate-y-1/2 z-10 grid h-9 w-9 place-items-center rounded-full bg-black/40 text-white text-lg hover:bg-black/55'>
+              ›
+            </button>
+          </div>
+
+          {/* وصف مختصر */}
+          <p className='mt-3 text-right text-white/85 text-sm md:text-base leading-relaxed'>
+            {sc.description}
+          </p>
+
+          {/* نقاط الانتقال */}
+          <div className='mt-2 flex items-center justify-center gap-2'>
+            {SHOWCASE.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`عرض ${i + 1}`}
+                onClick={() => setScIdx(i)}
+                className={
+                  "h-2.5 rounded-full transition-all " +
+                  (scIdx === i ? "w-6 bg-primary" : "w-2.5 bg-white/50")
+                }
+              />
+            ))}
           </div>
         </div>
       </section>

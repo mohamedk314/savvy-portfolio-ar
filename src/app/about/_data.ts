@@ -14,23 +14,35 @@ export type Partner = {
   logo: string; // مسار لوجو
 };
 
+/* ----- Timeline types (with details) ----- */
+export type TimelineDetails = {
+  heading?: string;
+  text?: string;
+  bullets?: string[];
+  images?: string[];
+  cta?: { label: string; href: string }[];
+};
+
 export type TimelineItem = {
   year?: string;
   title: string;
   desc: string;
+  details?: TimelineDetails;
 };
 
 export const ABOUT = {
   hero: {
     title: "مقدمة عن الشركة",
     subtitle:
-      "شركة سافي للإستثمار وإدارة المشروعات — كيان مصري يضم خبرات وتحالفات متعددة.",
-    cover: "/images/about/hero-cover.jpg", // صورة خلفية عريضة
+      "شركة سافي للاستثمار وإدارة المشروعات هي شركة مساهمة مصرية تضم العديد من الخبرات وتتمتع بتحالفات قوية مع كيانات كبرى في مختلف المجالات.",
+    cover: "/images/about/hero-cover.jpg",
     pills: [
-      { label: "إدارة المرافق" },
-      { label: "النظافة والمكافحة" },
-      { label: "التطوير العقاري" },
-      { label: "الدعاية والتسويق" },
+      { label: "قطاع الخدمات وإدارة المرافق والمنشآت" },
+      { label: "قطاع التجارة والتوريدات العامة" },
+      { label: "قطاع التطوير العقاري والمقاولات" },
+      {
+        label: "قطاع الدعاية والإعلان وتصميم وإنتاج وتطوير البرامج والتطبيقات",
+      },
     ] as Pill[],
   },
 
@@ -69,32 +81,35 @@ export const ABOUT = {
     name: "اللواء أ.ح د. حسام الدين محمد نجيده",
     photo: "/images/about/CEO.jpg",
     bio: [
-      "شغل العديد من الوظائف القيادية بالقوات المسلحة وأدار كيانات اقتصادية وخدمية كبرى.",
-      "خبرة تنفيذية على مستوى محافظات الجمهورية وإدارة نوادي وفنادق كبرى.",
-      "إدارة مشروعات الخدمة الوطنية والتعامل مع شركات وتحالفات ضخمة.",
+      "شغل العديد من الوظائف القيادية بالقوات المسلحة، وأدار العديد من الشركات والكيانات الاقتصادية الكبرى والمنشآت الخدمية.",
+      "تولى مديرًا لإدارة نوادي وفنادق القوات المسلحة لأكثر من ٦ سنوات على مستوى محافظات الجمهورية.",
+      "عمل كنائب لرئيس جهاز مشروعات الخدمة الوطنية، وهي الجهة التي تدير العديد من الشركات والكيانات الاقتصادية الضخمة في كافة المجالات.",
     ],
   },
 
-  securityIntroImage: "/images/about/security-intro.jpg", // من صورة (خدمات الحراسة والأمن)
+  securityIntroImage: "/images/about/security-intro.jpg",
 
   // تحالفات وشركاء رئيسيون (لوجوهات)
   partners: [
+    { name: "٨٩ للأمن", logo: "/images/about/partners/89logo.png" },
     {
-      name: "Rokill Pest Control",
-      logo: "/images/about/partners/rokill-pcs.png",
+      name: "روكيل للصيانة",
+      logo: "/images/about/partners/rokillmaintenancelogo.png",
     },
     {
-      name: "Rokill Maintenance",
-      logo: "/images/about/partners/rokill-maint.png",
+      name: "روكيل لمكافحة الحشرات",
+      logo: "/images/about/partners/rokillpestlogo.png",
     },
-    { name: "Tarolltours", logo: "/images/about/partners/tarol.png" },
-    { name: "SCOPE", logo: "/images/about/partners/scope.png" },
-    { name: "GMA", logo: "/images/about/partners/gma.png" },
-    { name: "TCL/راميكس", logo: "/images/about/partners/tcl.png" },
-    { name: "Tarollrrtours", logo: "/images/about/partners/tarol.png" },
+    { name: "رامبكس و TCL", logo: "/images/about/partners/tcllogo.png" },
+    { name: "سكوب للمعارض", logo: "/images/about/partners/scopelogo.png" },
+    { name: "GMA للكاميرات", logo: "/images/about/partners/GMAlogo.png" },
     {
-      name: "سافي للصناعات التعدينية",
-      logo: "/images/about/partners/safy-mining.png",
+      name: "يونيتك للمصاعد",
+      logo: "/images/about/partners/unitechlogo.png",
+    },
+    {
+      name: "الفتح لأنظمة التكييف",
+      logo: "/images/about/partners/alfathlogo.png",
     },
   ] as Partner[],
 
@@ -115,40 +130,84 @@ export const ABOUT = {
     "معدات حديثة وطرق مبتكرة وسريعة.",
   ],
 
-  // جاليريات (كل جاليري مستقل — أضف/احذف صورًا بحرية)
+  // جاليريات
   galleries: [
     {
       title: "سابقة الأعمال وشركاؤنا",
-      images: [
-        "/images/about/clients-grid-1.jpg", // (الصورة ذات شعارات كثيرة)
-        "/images/about/clients-exhibition-children.jpg", // (معرض الطفل/نظافة الفيلات)
-        "/images/about/clients-grid-2.jpg",
-        "/images/about/clients-hotels.jpg",
-      ],
+      images: [],
     },
     {
       title: "منشورات تعريفية",
-      images: [
-        "/images/about/intro-1.jpg",
-        "/images/about/mission-vision.jpg",
-        "/images/about/new-why-us.jpg",
-      ],
+      images: [],
     },
   ] as Gallery[],
 
-  // تايملاين اختياري لو أردت إضافته لاحقًا
+  // تايملاين اختياري
   timeline: [
-    { year: "2019", title: "التأسيس", desc: "إطلاق كيان سافي وتحالفاته." },
-    { year: "2021", title: "توسعات", desc: "التعاقد مع شركاء وخدمات جديدة." },
+    {
+      year: "2019",
+      title: "التأسيس",
+      desc: "إطلاق كيان سافي وتحالفاته.",
+      details: {
+        heading: "بداية التأسيس",
+        text: "تسجيل الشركة والانطلاق بفريق تشغيل صغير مع باقة خدمات أساسية في النظافة والمكافحة.",
+        bullets: ["تسجيل العلامة", "أول 10 عقود خدمة", "تكوين فريق أساسي"],
+      },
+    },
+    {
+      year: "2021",
+      title: "توسعات",
+      desc: "التعاقد مع شركاء وخدمات جديدة.",
+      details: {
+        heading: "توسع التشغيل",
+        text: "إضافة إدارة المرافق والتوريدات العامة وتوسيع التغطية الجغرافية.",
+        bullets: ["+25 عميل نشط", "عقود سنوية", "رفع الطاقة التشغيلية"],
+      },
+    },
     {
       year: "2024",
       title: " شراكات و تحالفات مع كيانات كبرى ",
       desc: "تعزيز التطبيقات ولوحات التشغيل.",
+      details: {
+        heading: "تحالفات استراتيجية",
+        text: "تكامل مع شركاء في الأمن والصيانة والمصاعد وأنظمة التكييف، وربط تقارير الأداء بلوحات متابعة.",
+        bullets: ["بوابة عملاء", "تقارير فورية", "تكامل أنظمة"],
+        cta: [{ label: "اعرف المزيد عن الشركاء", href: "/about" }],
+      },
     },
     {
       year: "2025",
       title: "مشاريع و أنشطه هامة",
       desc: "تعزيز التطبيقات ولوحات التشغيل.",
+      details: {
+        heading: "مشاريع 2025",
+        text: "تنفيذ مشروعات فندقية وسياحية وسكنية كبرى قيد التشغيل مع التزام كامل بالجودة.",
+        bullets: ["مشروع فنادق", "منتجعات سياحية", "مجمّعات سكنية"],
+      },
     },
   ] as TimelineItem[],
+
+  // بطاقات شركاء/تحالفات كبرى
+  cards: [
+    {
+      key: "grandaTourism",
+      title: "مجموعة جرانا للسياحة فئة (أ)",
+      cover: "/images/about/garranah.jpg",
+      bullets: [
+        "تأسست منذ عام 1979 وتمثلها الأستاذ كريم جرانة، رجل السياحة المرموق وأحد المساهمين.",
+        "تتكامل شركات المجموعة بما لديها من خبرات عديدة في إدارة الفنادق والمنتجعات السياحية والمراكب العائمة.",
+        "تُعد مجموعة جرانا شريكًا فاعلًا لشركة سافي.",
+      ],
+    },
+    {
+      key: "exec",
+      title: "المحاسب/ محمود شمس الدين نور",
+      cover: "/images/about/x.jpg",
+      bullets: [
+        "المدير التنفيذي للشركة وأحد المساهمين.",
+        "من ذوي الخبرة المحاسبية والإدارية.",
+        "شغل سابقًا منصب العضو المنتدب لشركة «أمان» التابعة لوزارة الداخلية.",
+      ],
+    },
+  ],
 };

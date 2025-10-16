@@ -2,9 +2,10 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ABOUT } from "./_data";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 /* ------- motion helpers ------- */
 const fadeUp = {
@@ -40,6 +41,9 @@ export default function AboutPage() {
     offset: ["start start", "end start"],
   });
   const yParallax = useTransform(scrollYProgress, [0, 1], [0, 120]);
+
+  // Modal state for timeline
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
     <main className='container py-10 md:py-12 space-y-10'>
@@ -77,6 +81,7 @@ export default function AboutPage() {
           whileInView='show'
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}>
+          {/* CEO photo */}
           <motion.div
             variants={fadeUp}
             className='relative aspect-[4/4.5] md:aspect-[4/5] overflow-hidden rounded-2xl'>
@@ -88,32 +93,59 @@ export default function AboutPage() {
             />
           </motion.div>
 
+          {/* CEO text */}
           <motion.div variants={fadeUp} className='text-right'>
             <p className='text-brand font-semibold'>{ABOUT.ceo.highlight}</p>
             <h2 className='text-2xl md:text-3xl font-extrabold text-accent mt-1'>
               {ABOUT.ceo.name}
             </h2>
-
             <div className='mt-3'>
               <BulletList items={ABOUT.ceo.bio} />
             </div>
-
-            {/* ribbon */}
-            <div className='mt-5 relative rounded-xl overflow-hidden border border-white/10'>
-              <Image
-                src={ABOUT.securityIntroImage}
-                alt='خدمات الحراسة والأمن'
-                width={1280}
-                height={640}
-                className='w-full h-auto object-cover'
-              />
-              <div className='absolute inset-0 bg-gradient-to-l from-[rgba(0,0,0,0.35)] to-transparent' />
-              <div className='absolute bottom-3 right-3 rounded-lg bg-[color:rgb(0_115_164_/_0.7)] px-3 py-1 text-xs text-white'>
-                خدمات الحراسة والأمن
-              </div>
-            </div>
           </motion.div>
         </motion.div>
+
+        {/* Cards */}
+        <div className='mt-8 grid md:grid-cols-2 gap-6'>
+          {ABOUT.cards.map((card) => {
+            const isWide = card.key === "security89";
+            return (
+              <motion.article
+                key={card.key}
+                variants={fadeUp}
+                initial='hidden'
+                whileInView='show'
+                viewport={{ once: true }}
+                className='overflow-hidden rounded-2xl border border-white/10 bg-white/5'>
+                {/* image */}
+                {card.cover && (
+                  <div
+                    className={
+                      isWide
+                        ? "relative aspect-[21/9]"
+                        : "relative aspect-[16/9]"
+                    }>
+                    <Image
+                      src={card.cover}
+                      alt={card.title}
+                      fill
+                      sizes='(min-width:1024px) 50vw, 100vw'
+                      className='object-cover'
+                      priority={isWide}
+                    />
+                  </div>
+                )}
+
+                <div className='p-5 md:p-6 text-right'>
+                  <h3 className='mb-2 text-lg font-semibold text-accent'>
+                    {card.title}
+                  </h3>
+                  <BulletList items={card.bullets} />
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
       </section>
 
       {/* Mission / Vision / Message */}
@@ -126,14 +158,6 @@ export default function AboutPage() {
             whileInView='show'
             viewport={{ once: true }}
             variants={fadeUp}>
-            <div className='relative aspect-[16/9]'>
-              <Image
-                src={blk.cover}
-                alt={blk.title}
-                fill
-                className='object-cover'
-              />
-            </div>
             <div className='p-5 md:p-6 text-right'>
               <h3 className='mb-2 text-lg font-semibold text-accent'>
                 {blk.title}
@@ -145,16 +169,17 @@ export default function AboutPage() {
       </section>
 
       {/* Partners */}
-      <section className='rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6'>
+      <section className='rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8'>
         <motion.h3
-          className='text-right text-xl font-bold mb-4 text-accent'
+          className='text-right text-2xl font-bold mb-6 text-accent'
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}>
           شركاؤنا وتحالفاتنا
         </motion.h3>
+
         <motion.div
-          className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-4'
+          className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-5 gap-5 md:gap-6'
           initial='hidden'
           whileInView='show'
           viewport={{ once: true }}
@@ -163,14 +188,18 @@ export default function AboutPage() {
             <motion.div
               key={p.name}
               variants={fadeUp}
-              className='rounded-xl border border-white/10 bg-white/5 p-3 flex items-center justify-center'>
+              className='rounded-xl border border-white/10 bg-white/5 px-4 py-5 md:px-5 md:py-6
+                   flex flex-col items-center justify-center min-h-[120px] md:min-h-[140px]'>
               <Image
                 src={p.logo}
                 alt={p.name}
-                width={140}
-                height={80}
-                className='h-12 w-auto object-contain'
+                width={180}
+                height={100}
+                className='h-16 md:h-20 w-auto object-contain'
               />
+              <p className='mt-3 text-center text-sm md:text-base text-white/85 leading-tight'>
+                {p.name}
+              </p>
             </motion.div>
           ))}
         </motion.div>
@@ -203,41 +232,7 @@ export default function AboutPage() {
         </motion.div>
       </section>
 
-      {/* Galleries */}
-      {ABOUT.galleries.map((g) => (
-        <section key={g.title} className='space-y-3'>
-          <motion.h3
-            className='text-right text-xl font-bold text-accent'
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}>
-            {g.title}
-          </motion.h3>
-          <motion.div
-            className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-            initial='hidden'
-            whileInView='show'
-            viewport={{ once: true, margin: "-80px" }}
-            variants={stagger}>
-            {g.images.map((src) => (
-              <motion.figure
-                key={src}
-                variants={fadeUp}
-                className='relative overflow-hidden rounded-2xl border border-white/10 bg-white/5'>
-                <Image
-                  src={src}
-                  alt={g.title}
-                  width={1280}
-                  height={800}
-                  className='h-full w-full object-cover'
-                />
-              </motion.figure>
-            ))}
-          </motion.div>
-        </section>
-      ))}
-
-      {/* Timeline — alternating sides, pure Tailwind */}
+      {/* Timeline — alternating sides, pure Tailwind + modal */}
       {ABOUT.timeline?.length > 0 && (
         <section className='rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6'>
           <h3 className='text-right text-xl font-bold mb-6 text-accent'>
@@ -250,23 +245,33 @@ export default function AboutPage() {
                 {i > 0 && <span className='alt-hr alt-hr-top' aria-hidden />}
 
                 <div className='alt-middle'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    viewBox='0 0 20 20'
-                    fill='currentColor'
-                    className='h-5 w-5 text-brand'>
-                    <path
-                      fillRule='evenodd'
-                      d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z'
-                      clipRule='evenodd'
-                    />
-                  </svg>
+                  <button
+                    type='button'
+                    onClick={() => setOpenIdx(i)}
+                    className='grid place-items-center h-10 w-10 rounded-full bg-brand/20 text-brand hover:bg-brand/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/60'
+                    aria-label={`تفاصيل: ${t.title}`}
+                    title='انقر لعرض التفاصيل'>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      viewBox='0 0 20 20'
+                      fill='currentColor'
+                      className='h-5 w-5'>
+                      <path
+                        fillRule='evenodd'
+                        d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z'
+                        clipRule='evenodd'
+                      />
+                    </svg>
+                  </button>
                 </div>
 
-                <div
+                <button
+                  type='button'
+                  onClick={() => setOpenIdx(i)}
                   className={`${
                     i % 2 === 0 ? "alt-start md:text-end" : "alt-end"
-                  } alt-box`}>
+                  } alt-box text-right hover:border-primary/40 hover:bg-white/10 transition`}
+                  aria-label={`فتح تفاصيل ${t.title}`}>
                   {t.year && (
                     <time className='font-mono italic text-brand'>
                       {t.year}
@@ -278,7 +283,7 @@ export default function AboutPage() {
                   {t.desc && (
                     <p className='text-white/75 text-sm mt-1'>{t.desc}</p>
                   )}
-                </div>
+                </button>
 
                 {i < ABOUT.timeline.length - 1 && (
                   <span className='alt-hr alt-hr-bottom' aria-hidden />
@@ -286,6 +291,91 @@ export default function AboutPage() {
               </li>
             ))}
           </ul>
+
+          {/* Modal */}
+          {openIdx !== null && (
+            <div
+              role='dialog'
+              aria-modal='true'
+              className='fixed inset-0 z-50 flex items-center justify-center p-4'
+              onClick={() => setOpenIdx(null)}>
+              <div className='absolute inset-0 bg-black/50 backdrop-blur-[1px]' />
+              <div
+                className='relative w-full max-w-lg md:max-w-xl lg:max-w-2xl rounded-2xl border border-white/10 bg-[rgba(16,20,28,.95)] p-5 shadow-2xl'
+                onClick={(e) => e.stopPropagation()}>
+                {(() => {
+                  const item = ABOUT.timeline[openIdx!];
+                  const d = item.details;
+
+                  return (
+                    <>
+                      <div className='flex items-start justify-between gap-3'>
+                        <div className='text-right'>
+                          {item.year && (
+                            <time className='font-mono text-brand'>
+                              {item.year}
+                            </time>
+                          )}
+                          <h4 className='text-accent text-xl font-bold mt-0.5'>
+                            {item.title}
+                          </h4>
+                        </div>
+                        <button
+                          type='button'
+                          onClick={() => setOpenIdx(null)}
+                          className='rounded-lg border border-white/15 px-2 py-1 text-sm text-white/85 hover:bg-white/10'
+                          aria-label='إغلاق'>
+                          إغلاق
+                        </button>
+                      </div>
+
+                      {d?.heading && (
+                        <div className='mt-2 text-white font-semibold'>
+                          {d.heading}
+                        </div>
+                      )}
+                      {d?.text && (
+                        <p className='mt-2 text-white/85 text-sm leading-relaxed'>
+                          {d.text}
+                        </p>
+                      )}
+
+                      {d?.bullets?.length ? (
+                        <ul className='mt-3 list-disc pr-5 text-sm text-white/85 space-y-1'>
+                          {d.bullets.map((b) => (
+                            <li key={b}>{b}</li>
+                          ))}
+                        </ul>
+                      ) : null}
+
+                      {d?.images?.length ? (
+                        <div className='mt-3 grid grid-cols-2 gap-2'>
+                          {d.images.map((src) => (
+                            <div
+                              key={src}
+                              className='relative aspect-[4/3] overflow-hidden rounded-lg'></div>
+                          ))}
+                        </div>
+                      ) : null}
+
+                      {d?.cta?.length ? (
+                        <div className='mt-4 flex flex-wrap justify-end gap-2'>
+                          {d.cta.map((c) => (
+                            <Link
+                              key={c.href}
+                              href={c.href}
+                              className='rounded-lg border border-primary/40 bg-primary/15 px-3 py-1.5 text-sm text-primary hover:bg-primary/25'>
+                              {c.label}
+                            </Link>
+                          ))}
+                        </div>
+                      ) : null}
+                    </>
+                  );
+                })()}
+              </div>
+            </div>
+          )}
 
           {/* local timeline styles */}
           <style jsx>{`
@@ -321,18 +411,6 @@ export default function AboutPage() {
               width: 40px;
               height: 40px;
             }
-            .alt-middle::before {
-              content: "";
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              width: 14px;
-              height: 14px;
-              background: #a3e635; /* brand */
-              border-radius: 9999px;
-              transform: translate(-50%, -50%);
-              box-shadow: 0 0 0 4px rgba(163, 230, 53, 0.25);
-            }
             .alt-hr {
               grid-column: 2;
               width: 2px;
@@ -348,7 +426,7 @@ export default function AboutPage() {
               align-self: start;
             }
             .alt-box {
-              background: rgba(2, 198, 240, 0.06); /* primary tint */
+              background: rgba(2, 198, 240, 0.06);
               border: 1px solid rgba(2, 198, 240, 0.18);
               border-radius: 0.75rem;
               padding: 0.9rem 1rem;

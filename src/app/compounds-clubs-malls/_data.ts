@@ -27,7 +27,7 @@ export const SECTIONS: Section[] = [
   {
     key: "companies",
     title: "الشركات و المباني الإدارية",
-    img: "/images/testsize/grid_1920x1200_16x10.png",
+    img: "/images/compounds/companies.jpg",
     subtitle: "",
     intro: [
       "يتم إدارة العمل مع الشركات و المباني الإدارية من خلال منظومة متكاملة من الخدمات المصممة خصيصاً لتلبية إحتياجاتها الشركات الكبرى.",
@@ -60,7 +60,7 @@ export const SECTIONS: Section[] = [
   {
     key: "factories",
     title: "المصانع و المخازن",
-    img: "/images/testsize/grid_1920x1200_16x10.png",
+    img: "/images/compounds/factory.jpg",
     subtitle: "",
     intro: [
       "يتم إدارة العمل مع المصانع والمخازن من خلال منظومة متكاملة من الخدمات المصممة للمؤسسات الصناعية الكبرى.",
@@ -93,7 +93,7 @@ export const SECTIONS: Section[] = [
   {
     key: "compounds",
     title: "الكمبوندات",
-    img: "/images/testsize/grid_1920x1200_16x10.png",
+    img: "/images/compounds/compounds.jpg",
     subtitle: "",
     intro: [
       "ندير الكمبوندات السكنية الراقية من خلال باقة متكاملة من الخدمات المصممة وفق أعلى المعايير لتوفير بيئة مثالية لملّاك الوحدات السكنية.",
@@ -131,7 +131,7 @@ export const SECTIONS: Section[] = [
   {
     key: "exhibitions",
     title: "المعارض والمؤتمرات",
-    img: "/images/testsize/grid_1920x1200_16x10.png",
+    img: "/images/compounds/events.jpg",
     subtitle:
       "إدارة متكاملة لضمان أعلى مستويات التنظيم والتميّز قبل وأثناء وبعد الفعاليات.",
     intro: [
@@ -173,7 +173,7 @@ export const SECTIONS: Section[] = [
   {
     key: "hospitals",
     title: "المستشفيات",
-    img: "/images/testsize/grid_1920x1200_16x10.png",
+    img: "/images/compounds/hospitals.jpg",
     subtitle:
       "منظومة متكاملة تضمن بيئة علاجية آمنة وصحية وفقًا لأعلى المعايير العالمية.",
     intro: [
@@ -217,7 +217,7 @@ export const SECTIONS: Section[] = [
   {
     key: "malls",
     title: "المولات",
-    img: "/images/testsize/grid_1920x1200_16x10.png",
+    img: "/images/compounds/malls.jpg",
     subtitle:
       "إدارة مرافق المولات بخدمات مصممة لضمان بيئة تسوّق آمنة وراقية للزوار وأصحاب المتاجر.",
     intro: [
@@ -260,7 +260,7 @@ export const SECTIONS: Section[] = [
   {
     key: "clubs",
     title: "الانديه",
-    img: "/images/testsize/grid_1920x1200_16x10.png",
+    img: "/images/compounds/clubs.jpg",
     subtitle:
       "إدارة الأندية الرياضية والاجتماعية عبر منظومة متكاملة من الخدمات المصممة وفق أعلى المعايير.",
     intro: ["نضمن تجربة متكاملة وخدمة لائقة الجودة للأعضاء والزوار."],

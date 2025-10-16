@@ -116,24 +116,20 @@ function ExtrasInner() {
 
       <section className='rounded-3xl border border-white/10 bg-white/5 overflow-hidden'>
         <div className='grid md:grid-cols-2'>
-          <div className='relative aspect-[16/10] md:aspect-auto md:min-h-[420px]'>
-            {/* Card wrapper */}
-            <div className='group relative rounded-2xl overflow-hidden bg-white/5 border border-white/10'>
-              <div className='relative aspect-[3/4] overflow-hidden rounded-2xl bg-black/10'>
-                <Image
-                  src={svc.cover} // the 768×1024 image you sent
-                  alt={svc.title}
-                  fill
-                  sizes='(min-width:1024px) 25vw, 100vw'
-                  className='object-contain'
-                  priority
-                />
-              </div>
-
-              <div className='pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-black/10 to-black/40' />
-            </div>
+          {/* image column — mobile-safe */}
+          <div className='relative min-h-[240px] sm:min-h-[320px] md:min-h-[420px]'>
+            <Image
+              src={svc.cover}
+              alt={svc.title}
+              fill
+              sizes='(max-width:767px) 100vw, (max-width:1023px) 100vw, 50vw'
+              className='object-cover md:object-contain rounded-none md:rounded-2xl'
+              priority
+            />
+            <div className='pointer-events-none absolute inset-0 md:rounded-2xl bg-gradient-to-b from-black/10 to-black/30' />
           </div>
 
+          {/* content */}
           <div className='p-6 md:p-8 text-right'>
             <h2 className='text-2xl font-bold text-accent'>
               ماذا تشمل الخدمة؟

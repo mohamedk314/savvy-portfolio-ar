@@ -16,6 +16,37 @@ export type Review = {
   attachment?: string;
 };
 
+// Showcase types
+export type ShowcaseItem = {
+  title: string;
+  image: string;       // full-width image
+  description: string; // short caption
+};
+
+// 4 items = 4 points
+export const SHOWCASE: ShowcaseItem[] = [
+  {
+    title: "سابقة الأعمال لسافي وشركائها",
+    image: "/images/showcase/fnad2.png",
+    description:
+      "نماذج من جهات وفنادق ومنتجعات تم تقديم خدمات التشغيل والصيانة والنظافة لها.",
+  },
+  {
+    title: "سابقة الأعمال لسافي وشركائها",
+    image: "/images/showcase/landscapesecurity.png",
+    description:
+      "تحالفات وشراكات مع كيانات كبرى في قطاع الضيافة والفنادق والجهات السيادية.",
+  },
+  {
+    title: "سابقة الأعمال لسافي وشركائها",
+    image: "/images/showcase/fnad22.png",
+    description:
+      "عملاء وشركات في قطاعات الأغذية والترفيه واللوجستيات والاتصالات والتأمين.",
+  },
+];
+
+
+
 export const REVIEWS: Review[] = [
   {
     id: "rv-101",
