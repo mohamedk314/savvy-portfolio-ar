@@ -44,7 +44,7 @@ export default function Footer() {
               <span aria-hidden>✉️</span>{" "}
               <span className='font-medium'>البريد الإلكتروني:</span>{" "}
               <a href='mailto:info@savvy.com' className='hover:text-accent'>
-                info@savvy.com
+                info@savvyeg.com
               </a>
             </li>
             <li>

@@ -29,7 +29,7 @@ function SocialIcons() {
   return (
     <div className='flex items-center gap-3 md:gap-4 mx-2 md:mx-4'>
       <a
-        href='https://m.me/yourpage'
+        href='https://www.facebook.com/share/1G2SqXrFPd/?mibextid=wwXIfr'
         aria-label='Messenger'
         target='_blank'
         rel='noopener noreferrer'
@@ -37,7 +37,7 @@ function SocialIcons() {
         <img src='/icons/messenger.svg' alt='' className='h-4 w-4' />
       </a>
       <a
-        href='https://www.instagram.com/yourpage'
+        href='https://www.instagram.com/savvy_for_services?igsh=YWE4enZ4N2M2czB2&utm_source=qr'
         aria-label='Instagram'
         target='_blank'
         rel='noopener noreferrer'
@@ -45,7 +45,7 @@ function SocialIcons() {
         <img src='/icons/instagram.svg' alt='' className='h-4 w-4' />
       </a>
       <a
-        href='https://www.tiktok.com/@yourpage'
+        href='https://www.tiktok.com'
         aria-label='TikTok'
         target='_blank'
         rel='noopener noreferrer'

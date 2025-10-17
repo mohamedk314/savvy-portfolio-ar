@@ -28,7 +28,7 @@ export const NORTH_COAST_SECTIONS: NorthCoastCategory[] = [
       {
         key: "beach",
         title: "نظافة الشواطئ",
-        img: "/images/testsize/grid_1920x1080_16x9.png",
+        img: "/images/northcoast/village/shwaty2.jpg",
         bullets: [
           "جمع المخلفات يدويًا وبالمعدات الخفيفة على الشاطئ والممشى.",
           "غسل مناطق الرمال الرطبة حول الدُّشّات ونقاط الشطف.",
@@ -38,7 +38,7 @@ export const NORTH_COAST_SECTIONS: NorthCoastCategory[] = [
       {
         key: "pools",
         title: "نظافة حمّامات السباحة",
-        img: "/images/testsize/grid_1920x1080_16x9.png",
+        img: "/images/northcoast/village/bseen.jpg",
         bullets: [
           "غسيل أرضيات المحيط وإزالة الطحالب والانزلاقات.",
           "تنظيف الدُّشّات وحواجز الصرف وتعقيم السلالم/الدرابزين.",
@@ -48,7 +48,7 @@ export const NORTH_COAST_SECTIONS: NorthCoastCategory[] = [
       {
         key: "roads",
         title: "نظافة الممرات والطرق الداخلية",
-        img: "/images/testsize/grid_1920x1080_16x9.png",
+        img: "/images/northcoast/village/mmratwtorok.jpg",
         bullets: [
           "كنس وغسيل دوري بماكينات مناسبة للخامة.",
           "تلميع الدرابزين والحوائط منخفضة الارتفاع وإزالة البقع.",
@@ -58,7 +58,7 @@ export const NORTH_COAST_SECTIONS: NorthCoastCategory[] = [
       {
         key: "entrances",
         title: "نظافة مداخل الفيلات والشاليهات",
-        img: "/images/testsize/grid_1920x1080_16x9.png",
+        img: "/images/northcoast/village/mda5l.jpg",
         bullets: [
           "تنظيف المداخل والسلالم القصيرة ولوحات الأرقام.",
           "تعقيم مقابض الأبواب وأزرار المصاعد (إن وجدت).",
@@ -68,7 +68,7 @@ export const NORTH_COAST_SECTIONS: NorthCoastCategory[] = [
       {
         key: "pest",
         title: "مكافحة الحشرات والقوارض",
-        img: "/images/testsize/grid_1920x1080_16x9.png",
+        img: "/images/northcoast/village/7shrat.jpg",
         bullets: [
           "معاينة نوع الإصابة (زواحف/زواحف طائرة/قوارض...).",
           "برنامج مرحلي ومعالجات موضعية وآمنة على البيئة.",
@@ -78,7 +78,7 @@ export const NORTH_COAST_SECTIONS: NorthCoastCategory[] = [
       {
         key: "public-gardens",
         title: "نظافة وصيانة الحدائق العامة",
-        img: "/images/testsize/grid_1920x1080_16x9.png",
+        img: "/images/northcoast/village/7da2k.jpg",
         bullets: [
           "قصّ نجيلة، تشذيب شجيرات، إزالة مخلفات خضراء.",
           "ريّ منظم ومسارات مشاة نظيفة.",
@@ -88,7 +88,7 @@ export const NORTH_COAST_SECTIONS: NorthCoastCategory[] = [
       {
         key: "security",
         title: "خدمة الأمن",
-        img: "/images/testsize/grid_1920x1080_16x9.png",
+        img: "/images/northcoast/village/2amn.jpg",
         bullets: [
           "حماية الأرواح والممتلكات وتدريب الأفراد على الطوارئ.",
           "نقاط تفتيش، جولات مسارية، وتقارير حوادث.",
@@ -109,7 +109,7 @@ export const NORTH_COAST_SECTIONS: NorthCoastCategory[] = [
       {
         key: "deep",
         title: "نظافة عميقة (بعد فتح الشاليه)",
-        img: "/images/testsize/grid_1920x1080_16x9.png",
+        img: "/images/northcoast/owner/3ameka.jpg",
         bullets: [
           "تنظيف شامل للأركان المخفية والمعالجة ضد الروائح.",
           "Steam للأقمشة عند الحاجة وصور قبل/بعد اختيارية.",
@@ -118,7 +118,7 @@ export const NORTH_COAST_SECTIONS: NorthCoastCategory[] = [
       {
         key: "routine",
         title: "نظافة معتادة (دوري وقت التواجد)",
-        img: "/images/testsize/grid_1920x1080_16x9.png",
+        img: "/images/northcoast/owner/normal.jpg",
         bullets: [
           "ترتيب عام، مسح أسطح ظاهرة، كنس ومسح أرضيات.",
           "تعقيم نقاط اللمس وإخراج النفايات.",
@@ -127,7 +127,7 @@ export const NORTH_COAST_SECTIONS: NorthCoastCategory[] = [
       {
         key: "post",
         title: "نظافة ما بعد التشطيب",
-        img: "/images/testsize/grid_1920x1080_16x9.png",
+        img: "/images/northcoast/owner/aftertashteeb.jpg",
         bullets: [
           "إزالة بواقي مواد البناء دون التأثير على الدهانات.",
           "غسيل/تلميع رخام/بورسلين/باركيه وفق تعليمات كل خامة.",
@@ -136,7 +136,7 @@ export const NORTH_COAST_SECTIONS: NorthCoastCategory[] = [
       {
         key: "owners-pest",
         title: "مكافحة الحشرات والقوارض",
-        img: "/images/testsize/grid_1920x1080_16x9.png",
+        img: "/images/northcoast/owner/pest.jpg",
         bullets: [
           "تشخيص الإصابة، معالجة موضعية، وخطة متابعة آمنة.",
           "مواد معتمدة وتقارير مختصرة.",
@@ -145,7 +145,7 @@ export const NORTH_COAST_SECTIONS: NorthCoastCategory[] = [
       {
         key: "private-garden",
         title: "صيانة الحدائق الخاصة",
-        img: "/images/testsize/grid_1920x1080_16x9.png",
+        img: "/images/northcoast/owner/garden.jpg",
         bullets: [
           "قصّ وتسميد وريّ، استبدال شتلات عند الطلب.",
           "تنظيف ممشى وحدود الزراعة.",
