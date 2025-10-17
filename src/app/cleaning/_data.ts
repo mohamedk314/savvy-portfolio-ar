@@ -13,8 +13,8 @@ export const CLEANING_CARDS: CleaningCard[] = [
     title: "نظافة الوحدات السكنية",
     covers: [
       "/images/cleaning/villas/Villas1.png",
-      "/images/cleaning/villas/Villas2.jpg",
-      "/images/cleaning/villas/Villas3.jpg",
+      "/images/cleaning/villas/villas2.jpg",
+      "/images/cleaning/villas/villas3.jpg",
     ],
   },
   {
