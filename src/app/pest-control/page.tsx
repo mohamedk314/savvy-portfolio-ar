@@ -172,7 +172,7 @@ export default function PestControlPage() {
       {/* full shared gallery */}
       <section className='space-y-3'>
         <h3 className='text-xl font-bold text-right text-accent'>
-          معرض الصور الكامل
+          {/*معرض الصور الكامل*/}{" "}
         </h3>
         <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
           {PEST_DATA.gallery.map((src) => (

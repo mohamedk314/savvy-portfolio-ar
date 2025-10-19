@@ -42,7 +42,6 @@ export default function AboutPage() {
   });
   const yParallax = useTransform(scrollYProgress, [0, 1], [0, 120]);
 
-  // Modal state for timeline
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
@@ -75,11 +74,11 @@ export default function AboutPage() {
 
       {/* CEO HIGHLIGHT */}
       <section className='rounded-3xl border border-white/10 bg-white/5 p-5 md:p-8'>
+        {/* Show immediately: parent animates on mount, not whileInView */}
         <motion.div
           className='grid md:grid-cols-[380px,1fr] gap-6 items-start'
-          initial='hidden'
-          whileInView='show'
-          viewport={{ once: true, margin: "-80px" }}
+          initial='show'
+          animate='show'
           variants={stagger}>
           {/* CEO photo */}
           <motion.div
@@ -89,7 +88,10 @@ export default function AboutPage() {
               src={ABOUT.ceo.photo}
               alt={ABOUT.ceo.name}
               fill
+              sizes='(min-width:768px) 380px, 60vw'
               className='object-cover'
+              priority
+              loading='eager'
             />
           </motion.div>
 
@@ -117,7 +119,6 @@ export default function AboutPage() {
                 whileInView='show'
                 viewport={{ once: true }}
                 className='overflow-hidden rounded-2xl border border-white/10 bg-white/5'>
-                {/* image */}
                 {card.cover && (
                   <div
                     className={
@@ -188,8 +189,7 @@ export default function AboutPage() {
             <motion.div
               key={p.name}
               variants={fadeUp}
-              className='rounded-xl border border-white/10 bg-white/5 px-4 py-5 md:px-5 md:py-6
-                   flex flex-col items-center justify-center min-h-[120px] md:min-h-[140px]'>
+              className='rounded-xl border border-white/10 bg-white/5 px-4 py-5 md:px-5 md:py-6 flex flex-col items-center justify-center min-h-[120px] md:min-h-[140px]'>
               <Image
                 src={p.logo}
                 alt={p.name}
@@ -232,7 +232,7 @@ export default function AboutPage() {
         </motion.div>
       </section>
 
-      {/* Timeline — alternating sides, pure Tailwind + modal */}
+      {/* Timeline */}
       {ABOUT.timeline?.length > 0 && (
         <section className='rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6'>
           <h3 className='text-right text-xl font-bold mb-6 text-accent'>
@@ -243,7 +243,6 @@ export default function AboutPage() {
             {ABOUT.timeline.map((t, i) => (
               <li key={t.title} className='alt-item'>
                 {i > 0 && <span className='alt-hr alt-hr-top' aria-hidden />}
-
                 <div className='alt-middle'>
                   <button
                     type='button'
@@ -306,7 +305,6 @@ export default function AboutPage() {
                 {(() => {
                   const item = ABOUT.timeline[openIdx!];
                   const d = item.details;
-
                   return (
                     <>
                       <div className='flex items-start justify-between gap-3'>

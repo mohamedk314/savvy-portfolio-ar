@@ -7,47 +7,72 @@
 @source "./src/**/*.{ts,tsx,js,jsx,mdx}";
 @source "./public/**/*.html";
 
-/* ===== SAVVY THEME TOKENS (Tailwind v4 @theme) =====
-   These names map directly to utilities like:
-   bg-surface, border-surface-2, text-accent, text-primary, etc.
-*/
+/* ===== SAVVY THEME TOKENS ===== */
 @theme {
   /* Surfaces */
-  --color-surface:   #000033;  /* page bg */
-  --color-surface-2: #080826;  /* cards / nav active / borders */
-  --color-surface-3: #000020;  /* navbar / footer darker */
+  --color-surface:   #000033;
+  --color-surface-2: #080826;
+  --color-surface-3: #000020;
 
   /* Text */
   --color-text:      #e8eeff;
 
-  /* Brand palette (match your new theme) */
-  --color-primary:   #02C6F0;  /* cyan */
-  --color-secondary: #0073A4;  /* deep cyan */
-  --color-accent:    #B1B610;  /* yellow for headings */
-  --color-brand:     #a3e635;  /* lime for dots/badges if needed */
+  /* Brand */
+  --color-primary:   #02C6F0;
+  --color-secondary: #0073A4;
+  --color-accent:    #B1B610;
+  --color-brand:     #a3e635;
 }
 
-/* Global */
+/* -------- Arabic + RTL defaults -------- */
 :root { color-scheme: dark; }
-html  { scroll-behavior: smooth; }
-body  { @apply bg-surface text-[--color-text] antialiased; }
+html { scroll-behavior: smooth; }
+
+/* Arabic web-safe stack; load Cairo/Tajawal via <link> if desired */
+:root{
+  --font-arabic: "IBM Plex Sans Arabic","Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+html[dir="rtl"] body{
+  direction: rtl;
+  text-align: right;
+  font-family: var(--font-arabic);
+  line-height: 1.8;
+  font-feature-settings: "calt","liga";
+  font-synthesis-weight: none;
+}
+
+
+body { @apply bg-surface text-[--color-text] antialiased; }
 
 /* Headings use the yellow accent */
 .h1{
   font-size: clamp(2rem, 2.5vw + 1.5rem, 3.2rem);
   font-weight: 800;
   color: var(--color-accent);
+  letter-spacing: 0; /* Arabic: no tracking */
 }
 .h2{
   font-size: clamp(1.5rem, 1.5vw + 1rem, 2.25rem);
   font-weight: 700;
   color: var(--color-accent);
+  letter-spacing: 0;
 }
-/* Utility for making any heading yellow via class */
 .heading-accent{ color: var(--color-accent); }
 
 /* Paragraph tone */
 .p{ @apply text-[color:rgba(232,238,255,0.8)] text-sm sm:text-base; }
+
+/* RTL lists: bullets on the right, proper padding */
+html[dir="rtl"] ul{ list-style: disc inside; padding-inline-start: 0; padding-inline-end: 1rem; }
+html[dir="rtl"] ol{ list-style: decimal inside; padding-inline-start: 0; padding-inline-end: 1.25rem; }
+/* Opt-in utilities if you need per-list control */
+.rtl-ul{ list-style: disc inside; padding-inline-start: 0; padding-inline-end: 1rem; }
+.rtl-ol{ list-style: decimal inside; padding-inline-start: 0; padding-inline-end: 1.25rem; }
+
+/* LTR/RTL helpers when mixing languages */
+.ltr{ direction: ltr; unicode-bidi: plaintext; text-align: left; }
+.rtl{ direction: rtl; unicode-bidi: plaintext; text-align: right; }
 
 /* Focus states */
 :focus-visible{
@@ -85,7 +110,7 @@ body  { @apply bg-surface text-[--color-text] antialiased; }
   padding-inline: clamp(1rem, 4vw, 2rem);
 }
 
-/* Navbar + footer darker than page bg, with subtle borders */
+/* Navbar + footer */
 .navbar,
 footer{
   background-color: var(--color-surface-3);
@@ -94,29 +119,19 @@ footer{
 }
 footer{ border-top: 1px solid rgba(255,255,255,0.05); }
 
-/* ==== Helpers to align with your components =====
-   Cards often use: border-surface-2 bg-surface/45
-   Ensure contrast on translucent surfaces.
-*/
-.card-surface{
-  @apply rounded-2xl border border-surface-2 bg-surface/45;
-}
+/* Card surface */
+.card-surface{ @apply rounded-2xl border border-surface-2 bg-surface/45; }
 
-/* Buttons that match the scheme */
+/* Buttons */
 .btn-primary{
-  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium
-         bg-primary text-[--color-text] hover:bg-primary/90;
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium bg-primary text-[--color-text] hover:bg-primary/90;
 }
 .btn-secondary{
-  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium
-         bg-secondary text-[--color-text] hover:bg-secondary/90;
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium bg-secondary text-[--color-text] hover:bg-secondary/90;
 }
 .btn-outline{
-  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium
-         border border-surface-2 bg-transparent text-[--color-text] hover:bg-surface/40;
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium border border-surface-2 bg-transparent text-[--color-text] hover:bg-surface/40;
 }
 
-/* Subtle separators using surface-2 */
+/* Subtle separators */
 .hr-surface{ height:1px; background: color-mix(in oklab, var(--color-surface-2), transparent 30%); }
-
-

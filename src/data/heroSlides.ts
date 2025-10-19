@@ -22,12 +22,12 @@ export const slides: Slide[] = [
     image: "/images/heroSlides/gardens.jpeg",
   },
   {
-    label: "الكومباوندات والأندية والمولات",
+    label: "المؤسسات  الكيانات الكبرى",
     href: "/compounds-clubs-malls",
-    image: "/images/heroSlides/compounds.jpeg",
+    image: "/images/heroSlides/compounds.jpg",
   },
   {
-    label: "الساحل الشمالي",
+    label: "خدمات القرى السياحيه",
     href: "/north-coast",
     image: "/images/heroSlides/northcoast.jpeg",
   },
