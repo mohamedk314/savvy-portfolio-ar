@@ -95,12 +95,11 @@ export default function GardensPage() {
         </h1>
         <p className='p mt-3'>{GARDEN_DATA.hero.tagline}</p>
       </header>
-
       {/* Feature image */}
       <div className='relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-white/5'>
         <Image
-          src={GARDEN_DATA.hero.cover}
-          alt={GARDEN_DATA.hero.title}
+          src={section.cover || GARDEN_DATA.hero.cover} // per-section image
+          alt={section.title}
           sizes='100vw'
           width={0}
           height={0}
@@ -109,10 +108,8 @@ export default function GardensPage() {
           priority
         />
       </div>
-
       {/* Tabs with icons */}
       <Segmented value={tab} onChange={setTab} tabs={[...GARDEN_DATA.tabs]} />
-
       {/* Section */}
       <section className='rounded-3xl border border-white/10 bg-white/5 overflow-hidden'>
         <div className='grid md:grid-cols-2'>
@@ -140,7 +137,6 @@ export default function GardensPage() {
           </div>
         </div>
       </section>
-
       {/* Full gallery */}
       <section className='space-y-3'>
         <h3 className='text-xl font-bold text-right text-accent'>

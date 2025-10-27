@@ -97,8 +97,8 @@ export default function SecurityPage() {
 
         <div className='relative mt-6 mx-auto max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-white/5'>
           <Image
-            src={SECURITY.hero.cover}
-            alt={SECURITY.hero.title}
+            src={section.cover || SECURITY.hero.cover}
+            alt={section.title}
             sizes='100vw'
             width={0}
             height={0}

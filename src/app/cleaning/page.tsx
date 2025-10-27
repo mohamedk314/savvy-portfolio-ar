@@ -70,7 +70,7 @@ export default function CleaningHome() {
           {["وحدات سكنية", "خدمات أخرى"].map((t) => (
             <span
               key={t}
-              className='rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs text-primary'>
+              className='rounded-full border border-blue-800/70 bg-white/10 px-3 py-1 text-base md:text-lg font-semibold text-white drop-shadow-sm'>
               {t}
             </span>
           ))}

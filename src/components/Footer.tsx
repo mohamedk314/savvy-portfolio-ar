@@ -22,7 +22,7 @@ export default function Footer() {
               <div className='relative w-full aspect-[4/3]'>
                 <iframe
                   title='Savvy Office Location'
-                  src='https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d215.77579678225908!2d31.336076930165266!3d30.082363326116283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e6!4m0!4m3!3m2!1d30.082358394138097!2d31.33635722100483!5e0!3m2!1sen!2seg!4v1758447292545!5m2!1sen!2seg'
+                  src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1726.1976719881288!2d31.339043711778256!3d30.08286195709796!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583f005952123b%3A0xb5d3dc7752d2afb0!2z2LTYsdmD2Kkgc2F2dnk!5e0!3m2!1sen!2seg!4v1761579771710!5m2!1sen!2seg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade'
                   className='absolute inset-0 h-full w-full'
                   loading='lazy'
                   referrerPolicy='no-referrer-when-downgrade'

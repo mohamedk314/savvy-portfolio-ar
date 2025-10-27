@@ -73,7 +73,7 @@ export const REVIEWS: Review[] = [
     id: "rv-103",
     name: "عميل",
     role: "مالك فيلا",
-    rating: 5,
+    rating: 4,
     comment: "الخدمة ممتازة، التزام بالمواعيد ونظافة بعد الانتهاء.",
     service: "تنظيف ما بعد التشطيب",
     date: "2024-06-27",
@@ -105,7 +105,7 @@ export const REVIEWS: Review[] = [
     id: "rv-106",
     name: "Customer",
     role: "Home owner",
-    rating: 5,
+    rating: 4,
     comment:
       "Punctuality and professionalism. Mr. Nabil and all his staff. Thanks.",
     service: "تنظيف دوري",
@@ -126,7 +126,7 @@ export const REVIEWS: Review[] = [
     id: "rv-108",
     name: "Customer",
     role: "Home owner",
-    rating: 5,
+    rating: 4,
     comment:
       "Friendliness and response. يُفضّل توضيح المتطلبات عند طلب الديب كلين. الفريق كله كان رائعًا: شيماء، نسمة، سعاد، زياد، إبراهيم. نحتاج أحيانًا أدوات إضافية لتنظيف بعض الكراسي.",
     service: "تنظيف عميق",
@@ -158,7 +158,7 @@ export const REVIEWS: Review[] = [
     id: "rv-111",
     name: "عميل",
     role: "مالك فيلا",
-    rating: 5,
+    rating: 3,
     comment:
       "الفريق ممتاز ومتعاون. وجزيل الشكر للأخ نائل الكريم على حسن التعامل.",
     service: "تنظيف عميق",
@@ -169,7 +169,7 @@ export const REVIEWS: Review[] = [
     id: "rv-112",
     name: "Customer",
     role: "Home owner",
-    rating: 5,
+    rating: 4,
     comment: "Very good. All very good. No comments.",
     service: "تنظيف دوري",
     date: "2024-10-03",
@@ -185,23 +185,22 @@ export const REVIEWS: Review[] = [
 export const ICONS = {
   checkCircle:
     "M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20Zm-1.2-6.2-3.3-3.3 1.4-1.4 1.9 1.9 4.6-4.6 1.4 1.4-6 6Z",
-  shield:
-    "M12 2l7 3v6c0 5-3.8 9.7-7 11-3.2-1.3-7-6-7-11V5l7-3Z",
-  wrench:
-    "M22 7a5 5 0 0 1-7 4.58l-7.59 7.6-2.83-2.83 7.6-7.59A5 5 0 1 1 22 7Z",
-  leaf:
-    "M5 21c8 0 14-6 14-14V5h-2C9 5 3 11 3 19v2h2Z",
-  bug:
-    "M7 8h10v2H7V8Zm5-5 2 2h3v2h-3l-2 2-2-2H7V5h3l2-2Zm-6 9h12v6a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-6Z",
-  star:
-    "M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z",
+  shield: "M12 2l7 3v6c0 5-3.8 9.7-7 11-3.2-1.3-7-6-7-11V5l7-3Z",
+  wrench: "M22 7a5 5 0 0 1-7 4.58l-7.59 7.6-2.83-2.83 7.6-7.59A5 5 0 1 1 22 7Z",
+  leaf: "M5 21c8 0 14-6 14-14V5h-2C9 5 3 11 3 19v2h2Z",
+  bug: "M7 8h10v2H7V8Zm5-5 2 2h3v2h-3l-2 2-2-2H7V5h3l2-2Zm-6 9h12v6a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-6Z",
+  star: "M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z",
 } as const;
 
 export const SERVICES_LIST = [
-  { label: "نظافة",                  icon: ICONS.checkCircle },
-  { label: "أمن",                    icon: ICONS.shield },
-  { label: "صيانة",                  icon: ICONS.wrench },
-  { label: "تنسيق حدائق",            icon: ICONS.leaf },
-  { label: "مكافحة الحشرات و القوارض", icon: ICONS.bug },
-  { label: "خدمات أخرى",             icon: ICONS.star },
+  { label: "نظافة", icon: ICONS.checkCircle, href: "/cleaning" },
+  { label: "أمن", icon: ICONS.checkCircle, href: "/security" },
+  { label: "تنسيق حدائق", icon: ICONS.checkCircle, href: "/gardens" },
+  {
+    label: "مكافحة الحشرات و القوارض",
+    icon: ICONS.checkCircle,
+    href: "/pest-control",
+  },
+  { label: "خدمات أخرى", icon: ICONS.checkCircle, href: "/cleaning/extras/" },
 ] as const;
+

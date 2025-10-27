@@ -123,11 +123,11 @@ export default function PestControlPage() {
         </div>
       </header>
 
-      {/* Shared feature image under header */}
+      {/* Shared feature image under header -> now per section */}
       <div className='relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-white/5'>
         <Image
-          src={PEST_DATA.hero.cover}
-          alt={PEST_DATA.hero.title}
+          src={PEST_DATA.sections[tab].cover || PEST_DATA.hero.cover}
+          alt={PEST_DATA.sections[tab].title}
           sizes='100vw'
           width={0}
           height={0}

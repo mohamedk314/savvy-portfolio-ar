@@ -391,10 +391,11 @@ export default function Page() {
               </h3>
 
               {SERVICES_LIST.map((it) => (
-                <div
+                <Link
                   key={it.label}
-                  className='relative flex items-center justify-end gap-3 rounded-xl border border-surface-2 bg-surface/45 px-3 py-2.5 text-right'>
-                  {/* decorative faint icon on the RIGHT */}
+                  href={it.href}
+                  className='relative flex items-center justify-end gap-3 rounded-xl border border-surface-2 bg-surface/45 px-3 py-2.5 text-right transition hover:bg-surface-soft/70'>
+                  {/* decorative faint icon */}
                   <svg
                     aria-hidden
                     viewBox='0 0 24 24'
@@ -402,18 +403,18 @@ export default function Page() {
                     <path d={it.icon} fill='currentColor' />
                   </svg>
 
-                  {/* icon chip — fixed on the RIGHT */}
+                  {/* icon chip */}
                   <span className='inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 text-primary shrink-0'>
                     <svg viewBox='0 0 24 24' className='h-5 w-5'>
                       <path d={it.icon} fill='currentColor' />
                     </svg>
                   </span>
 
-                  {/* label — to the LEFT of the icon, still right-aligned */}
+                  {/* label */}
                   <span className='font-bold text-[--color-text] flex-1 text-right'>
                     {it.label}
                   </span>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

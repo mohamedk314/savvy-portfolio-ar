@@ -54,10 +54,17 @@ export default function AboutPage() {
           <h1 className='text-3xl md:text-4xl font-extrabold text-accent tracking-tight'>
             {ABOUT.hero.title}
           </h1>
+
           <p className='mt-3 text-white/90'>{ABOUT.hero.subtitle}</p>
+
+          {/* darker blue outline + more legible text */}
           <div className='mx-auto mt-5 flex flex-wrap justify-center gap-2'>
             {ABOUT.hero.pills.map((p) => (
-              <KBadge key={p.label} text={p.label} />
+              <span
+                key={p.label}
+                className='rounded-full border border-blue-800/70 bg-white/10 px-3 py-1 text-base md:text-lg font-semibold text-white drop-shadow-sm'>
+                {p.label}
+              </span>
             ))}
           </div>
         </motion.div>

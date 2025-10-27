@@ -45,12 +45,12 @@ function SocialIcons() {
         <img src='/icons/instagram.svg' alt='' className='h-4 w-4' />
       </a>
       <a
-        href='https://www.tiktok.com'
-        aria-label='TikTok'
+        href='https://wa.me/201040009403?text=مرحباً%20أرغب%20في%20الاستفسار%20عن%20الخدمة'
+        aria-label='Whatsapp'
         target='_blank'
         rel='noopener noreferrer'
         className='inline-flex h-6 w-6 items-center justify-center rounded-full ring-1 ring-white/15 hover:ring-white/30 transition'>
-        <img src='/icons/tiktok.svg' alt='' className='h-4 w-4' />
+        <img src='/icons/whatsapp.svg' alt='' className='h-4 w-4' />
       </a>
     </div>
   );

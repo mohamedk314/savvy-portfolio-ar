@@ -4,6 +4,7 @@
 export type Block = { title: string; items: string[] };
 
 export type Section = {
+  cover: string;
   title: string;
   subtitle: string;
   bullets: string[];
@@ -59,9 +60,9 @@ export const SECURITY = {
           title: "التجهيزات",
           items: [
             "أجهزة اتصال لاسلكي",
-            "سيارات ودراجات دورية",
+            "سيارات ودراجات بخارية",
             "كاميرات مراقبة",
-            "بوابات إلكترونية",
+            "وسائل وأدوات الردع ",
           ],
         },
         {
@@ -73,6 +74,7 @@ export const SECURITY = {
           ],
         },
       ],
+      cover: "/images/security/sec1.jpg",
     },
     scope: {
       title: "نطاق العمل",
@@ -86,14 +88,19 @@ export const SECURITY = {
       ],
       blocks: [
         {
-          title: "توسّع التغطية",
-          items: ["بوابات ومحيط خارجي", "مناطق حساسة داخلية", "مواقف ومخازن"],
+          title: "مناطق التغطيه ",
+          items: [
+            "بوابات ومحيط خارجي",
+            "مناطق حساسة داخلية",
+            "المخازن و اماكن انتظار السيارات ",
+          ],
         },
         {
           title: "تشغيل مرن",
           items: ["ثابت + متحرك", "تغطية موسمية", "تدعيم فوري عند الحاجة"],
         },
       ],
+      cover: "/images/security/sec2.jpg",
     },
     services: {
       title: "أنواع الخدمة",
@@ -117,6 +124,7 @@ export const SECURITY = {
           ],
         },
       ],
+      cover: "/images/security/sec3.jpg",
     },
     faq: {
       title: "الأسئلة الشائعة",
@@ -134,6 +142,7 @@ export const SECURITY = {
           items: ["معاينة إلزامية", "عرض فني/مالي مفصّل", "مرونة عقود"],
         },
       ],
+      cover: "/images/security/sec4.jpg",
     },
   } as Record<TabKey, Section>,
 } as const;
