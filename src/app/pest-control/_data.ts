@@ -51,7 +51,7 @@ export const PEST_DATA = {
           items: ["وزارة الصحة والزراعة", "مطابقة للمواصفات العالمية"],
         },
       ],
-      cover: "/images/pestcontrol/pestcontrol.png",
+      cover: "/images/pestcontrol/pest1.jpg",
     },
     methods: {
       title: "طرق المكافحة",
@@ -72,7 +72,7 @@ export const PEST_DATA = {
           items: [" استخدام أنظمة لا تستدعي مغادرة المكان  "],
         },
       ],
-      cover: "/images/pestcontrol/pestcontrol.png",
+      cover: "/images/pestcontrol/pest2.jpg",
     },
     services: {
       title: "أنواع الخدمات",
@@ -84,7 +84,7 @@ export const PEST_DATA = {
       blocks: [
         { title: "النطاق", items: ["سكني", "تجاري", "مواقع متعددة الأدوار"] },
       ],
-      cover: "/images/pestcontrol/pestcontrol.png",
+      cover: "/images/pestcontrol/pest3.jpg",
     },
     warranty: {
       title: "الضمان",
@@ -101,7 +101,7 @@ export const PEST_DATA = {
         },
         { title: "الدعم", items: ["اتصال مباشر", "واتساب", "زيارة طارئة"] },
       ],
-      cover: "/images/pestcontrol/pestcontrol.png",
+      cover: "/images/pestcontrol/pest4.jpg",
     },
     faq: {
       title: "الأسئلة الشائعة",
@@ -141,7 +141,7 @@ export const PEST_DATA = {
           ],
         },
       ],
-      cover: "/images/pestcontrol/pestcontrol.png",
+      cover: "/images/pestcontrol/pest5.jpg",
     },
   } as Record<TKey, PestSection>,
 } as const;

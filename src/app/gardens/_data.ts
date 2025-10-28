@@ -57,7 +57,7 @@ export const GARDEN_DATA = {
           items: ["مهندسون زراعيون", "عمالة مدرَّبة"],
         },
       ],
-      cover: "/images/gardens/Gardens.jpg",
+      cover: "/images/gardens/garden2.jpg",
     },
     methods: {
       title: "طرق العمل",
@@ -77,7 +77,7 @@ export const GARDEN_DATA = {
           items: ["كتيّب إرشادات", "زيارة متابعة مجانية", "عقد صيانة اختياري"],
         },
       ],
-      cover: "/images/gardens/Gardens.jpg",
+      cover: "/images/gardens/garden3.jpg",
     },
     services: {
       title: "الخدمات",
@@ -104,7 +104,7 @@ export const GARDEN_DATA = {
           items: ["قص وتقليم", "تنظيف أحواض", "تسميد موسمي", "فحص شبكة الري"],
         },
       ],
-      cover: "/images/gardens/Gardens.jpg",
+      cover: "/images/gardens/garden4.jpg",
     },
     faq: {
       title: "الأسئلة الشائعة",
@@ -182,7 +182,7 @@ export const GARDEN_DATA = {
           ],
         },
       ],
-      cover: "/images/gardens/Gardens.jpg",
+      cover: "/images/gardens/garden1.jpg",
     },
   } as unknown as Record<TabKey, Section>,
 } as const;
