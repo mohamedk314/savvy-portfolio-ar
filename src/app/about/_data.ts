@@ -91,7 +91,7 @@ export const ABOUT = {
 
   // تحالفات وشركاء رئيسيون (لوجوهات)
   partners: [
-    { name: "٨٩ للأمن", logo: "/images/about/partners/89logo.png" },
+    { name: "شركة تيما للامن ", logo: "/images/about/partners/theamalogo.png" },
     {
       name: "روكيل للصيانة",
       logo: "/images/about/partners/rokillmaintenancelogo.png",

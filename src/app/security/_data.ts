@@ -18,7 +18,7 @@ export const SECURITY = {
   hero: {
     title: "خدمة الأمن والحراسة",
     tagline: "تأمين شامل على مدار الساعة بحلول مرنة ومتكاملة",
-    cover: "/images/security/89.jpg", // one big shared image
+    cover: "/images/security/theama.jpg", // one big shared image
   },
 
   /* One gallery shared across all tabs. Add/remove freely. */
@@ -49,7 +49,7 @@ export const SECURITY = {
     overview: {
       title: "نظرة عامة",
       subtitle:
-        "نقدم، مع شركائنا، حلول أمن وحراسة متكاملة بأفراد ومشرفين ومديري أمن مدرَّبين، مع أحدث التجهيزات والأنظمة وفق دراسة أمنية لكل موقع.",
+        "شركة تيما للامن و الحراسه و نقل الاموال و هى احد الشركات المملوكة لساڤى و نقدم من خلالها خدمة امن محترفه للمنشات المؤسسات و حراسه الشخصيات",
       bullets: [
         "تشغيل وحراسة مستمرة 24/7",
         "كوادر أمنية معتمدة وإشراف ميداني",
@@ -74,7 +74,7 @@ export const SECURITY = {
           ],
         },
       ],
-      cover: "/images/security/sec1.jpg",
+      cover: "/images/security/theama.jpg",
     },
     scope: {
       title: "نطاق العمل",
@@ -100,7 +100,7 @@ export const SECURITY = {
           items: ["ثابت + متحرك", "تغطية موسمية", "تدعيم فوري عند الحاجة"],
         },
       ],
-      cover: "/images/security/sec2.jpg",
+      cover: "/images/security/theama.jpg",
     },
     services: {
       title: "أنواع الخدمة",
@@ -124,7 +124,7 @@ export const SECURITY = {
           ],
         },
       ],
-      cover: "/images/security/sec3.jpg",
+      cover: "/images/security/sec5.jpg",
     },
     faq: {
       title: "الأسئلة الشائعة",
@@ -142,7 +142,7 @@ export const SECURITY = {
           items: ["معاينة إلزامية", "عرض فني/مالي مفصّل", "مرونة عقود"],
         },
       ],
-      cover: "/images/security/sec4.jpg",
+      cover: "/images/security/sec6.jpg",
     },
   } as Record<TabKey, Section>,
 } as const;

@@ -426,6 +426,64 @@ export default function Page() {
         </div>
       </section>
 
+{/* ISO CERTIFICATIONS */}
+<section className='container max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12'>
+  <div className='rounded-3xl border border-surface-2 bg-surface/45 p-4 md:p-6'>
+    <div className='mb-6 text-right'>
+      <h2
+        className='text-3xl md:text-4xl font-extrabold'
+        style={{ color: "#B1B610" }}>
+        شهادات الجودة والاعتماد
+      </h2>
+      <p className='text-white/75 mt-2 text-sm md:text-base'>
+        سافي معتمدة دوليًا وفقًا لمعايير الجودة والإدارة البيئية
+      </p>
+    </div>
+
+    <div className='grid gap-6 sm:grid-cols-2'>
+      {/* ISO 9001 */}
+      <div className='rounded-2xl overflow-hidden border border-white/10 bg-black/20'>
+        <div className='relative aspect-[3/4]'>
+          <Image
+            src='/images/certificates/iso-9001.jpg'
+            alt='ISO 9001:2015 Quality Management System Certificate'
+            fill
+            className='object-contain bg-white'
+          />
+        </div>
+        <div className='p-4 text-right'>
+          <h3 className='font-bold text-white'>
+            ISO 9001:2015
+          </h3>
+          <p className='text-white/70 text-sm mt-1'>
+            نظام إدارة الجودة
+          </p>
+        </div>
+      </div>
+
+      {/* ISO 14001 */}
+      <div className='rounded-2xl overflow-hidden border border-white/10 bg-black/20'>
+        <div className='relative aspect-[3/4]'>
+          <Image
+            src='/images/certificates/iso-14001.jpg'
+            alt='ISO 14001:2015 Environmental Management System Certificate'
+            fill
+            className='object-contain bg-white'
+          />
+        </div>
+        <div className='p-4 text-right'>
+          <h3 className='font-bold text-white'>
+            ISO 14001:2015
+          </h3>
+          <p className='text-white/70 text-sm mt-1'>
+            نظام الإدارة البيئية
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
       {/* REVIEWS + VIDEO — unified card */}
       <section className='container max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12'>
         <div className='rounded-3xl border border-surface-2 bg-surface/45 p-4 md:p-6'>
